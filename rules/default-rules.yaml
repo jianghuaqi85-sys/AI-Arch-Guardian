@@ -1,0 +1,112 @@
+# AI-Arch-Guardian - External Rules Configuration
+#
+# This file defines custom audit rules that can be loaded dynamically.
+# Format: YAML 1.2
+#
+# Usage:
+#   node index.js /path/to/project --rules rules/default-rules.yaml
+#
+# Rule Schema:
+#   - id: Rule identifier (e.g., 'CUSTOM-001')
+#   - category: Rule category (nacos | openfeign | sentinel | hystrix | custom)
+#   - severity: Severity level (critical | high | medium | low | info)
+#   - title: Human-readable title
+#   - description: Detailed description
+#   - rationale: Why this rule exists
+#   - checkExpression: JavaScript expression to evaluate (advanced)
+#   - enabled: Whether rule is enabled (default: true)
+#   - tags: Optional tags for grouping
+
+version: '1.0.0'
+standardsVersion: 'Spring Cloud Alibaba 2022.x'
+
+# ============================================================================
+# Custom Rules Section
+# ============================================================================
+
+rules:
+  # Example: Custom business logic rule
+  # - id: 'CUSTOM-001'
+  #   category: 'custom'
+  #   severity: 'medium'
+  #   title: 'Service naming convention check'
+  #   description: 'Service names should follow naming convention'
+  #   rationale: 'Consistent naming improves maintainability'
+  #   enabled: true
+  #   tags: ['naming', 'convention']
+
+  # Example: Custom security rule
+  # - id: 'CUSTOM-002'
+  #   category: 'custom'
+  #   severity: 'high'
+  #   title: 'Sensitive data in config check'
+  #   description: 'Check for hardcoded passwords/secrets'
+  #   rationale: 'Security best practice'
+  #   enabled: false  # Disabled by default
+
+# ============================================================================
+# Override Section
+# ============================================================================
+# Use this to override or disable built-in rules
+
+overrides:
+  # Disable a built-in rule
+  # - ruleId: 'NACOS-002'
+  #   action: 'disable'
+  #   reason: 'Not applicable for our architecture'
+
+  # Modify severity of a built-in rule
+  # - ruleId: 'FEIGN-004'
+  #   action: 'setSeverity'
+  #   value: 'low'
+
+# ============================================================================
+# Environment-specific Settings
+# ============================================================================
+
+environments:
+  development:
+    relaxedRules:
+      - 'NACOS-001'  # Skip namespace check in dev
+      - 'NACOS-003'  # Allow localhost in dev
+    additionalRules:
+      - 'dev-only-rule'
+
+  production:
+    strictMode: true
+    failOn:
+      - 'critical'
+      - 'high'
+    autoFix:
+      enabled: true
+
+# ============================================================================
+# Tags for Rule Grouping
+# ============================================================================
+
+tags:
+  security:
+    - 'security'
+    - 'nacos'
+  performance:
+    - 'sentinel'
+    - 'openfeign'
+  migration:
+    - 'hystrix'
+  best-practice:
+    - 'nacos'
+    - 'openfeign'
+    - 'sentinel'
+
+# ============================================================================
+# Metadata
+# ============================================================================
+
+metadata:
+  author: 'AI-Arch-Guardian'
+  created: '2025-01-01'
+  lastUpdated: '2025-01-01'
+  documentation: 'https://github.com/your-org/ai-arch-guardian/wiki/Rules-Configuration'
+  support:
+    email: 'support@example.com'
+    url: 'https://github.com/your-org/ai-arch-guardian/issues'

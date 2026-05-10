@@ -1,0 +1,825 @@
+{
+  "standardsVersion": "Spring Cloud Alibaba 2022.x Enhanced",
+  "projectRoot": "C:\\Users\\86198\\Desktop\\java项目文档\\microservice-mall",
+  "detectedEnvironment": "production",
+  "findings": [
+    {
+      "service": "user-svc",
+      "servicePath": "user-svc",
+      "ruleId": "FEIGN-001",
+      "category": "openfeign",
+      "severity": "critical",
+      "title": "@FeignClient \"notify-svc\" 缺少降级配置",
+      "rationale": "无降级配置会导致服务雪崩",
+      "clientName": "notify-svc",
+      "confidence": {
+        "score": 80,
+        "level": "high",
+        "factors": [
+          {
+            "factor": "no_fallback",
+            "impact": -20
+          }
+        ]
+      },
+      "environment": "production"
+    },
+    {
+      "service": "order-svc",
+      "servicePath": "order-svc",
+      "ruleId": "NACOS-002",
+      "category": "nacos",
+      "severity": "high",
+      "title": "Nacos 配置中心命名空间应与服务发现分离",
+      "rationale": "配置涉及敏感信息，应独立隔离",
+      "location": "order-svc",
+      "confidence": {
+        "score": 100,
+        "level": "high",
+        "factors": []
+      },
+      "environment": "production",
+      "isEnvironmentAdjusted": false
+    },
+    {
+      "service": "order-svc",
+      "servicePath": "order-svc",
+      "ruleId": "NACOS-003",
+      "category": "nacos",
+      "severity": "critical",
+      "title": "Nacos server-addr 不应使用 localhost (生产环境)",
+      "rationale": "生产环境应使用内网地址或域名",
+      "location": "order-svc",
+      "confidence": {
+        "score": 100,
+        "level": "high",
+        "factors": []
+      },
+      "environment": "production",
+      "isEnvironmentAdjusted": true
+    },
+    {
+      "service": "order-svc",
+      "servicePath": "order-svc",
+      "ruleId": "FEIGN-001",
+      "category": "openfeign",
+      "severity": "critical",
+      "title": "@FeignClient 必须配置 fallback 或 fallbackFactory",
+      "rationale": "无降级配置会导致服务雪崩",
+      "location": "order-svc",
+      "confidence": {
+        "score": 65,
+        "level": "medium",
+        "factors": [
+          {
+            "factor": "no_fallback",
+            "impact": -20
+          },
+          {
+            "factor": "no_factory",
+            "impact": -15
+          }
+        ]
+      },
+      "environment": "production",
+      "isEnvironmentAdjusted": true
+    },
+    {
+      "service": "order-svc",
+      "servicePath": "order-svc",
+      "ruleId": "FEIGN-002",
+      "category": "openfeign",
+      "severity": "high",
+      "title": "Sentinel 或 Resilience4j 依赖必须存在",
+      "rationale": "无熔断降级依赖，fallback 不会生效",
+      "location": "order-svc",
+      "confidence": {
+        "score": 100,
+        "level": "high",
+        "factors": []
+      },
+      "environment": "production",
+      "isEnvironmentAdjusted": false
+    },
+    {
+      "service": "order-svc",
+      "servicePath": "order-svc",
+      "ruleId": "FEIGN-003",
+      "category": "openfeign",
+      "severity": "critical",
+      "title": "circuitbreaker.enabled 必须为 true",
+      "rationale": "2021.x+ 版本需显式启用",
+      "location": "order-svc",
+      "confidence": {
+        "score": 100,
+        "level": "high",
+        "factors": []
+      },
+      "environment": "production",
+      "isEnvironmentAdjusted": false
+    },
+    {
+      "service": "order-svc",
+      "servicePath": "order-svc",
+      "ruleId": "FEIGN-001",
+      "category": "openfeign",
+      "severity": "critical",
+      "title": "@FeignClient \"payment-svc\" 缺少降级配置",
+      "rationale": "无降级配置会导致服务雪崩",
+      "clientName": "payment-svc",
+      "confidence": {
+        "score": 65,
+        "level": "medium",
+        "factors": [
+          {
+            "factor": "no_fallback",
+            "impact": -20
+          },
+          {
+            "factor": "no_factory",
+            "impact": -15
+          }
+        ]
+      },
+      "environment": "production"
+    },
+    {
+      "service": "order-svc",
+      "servicePath": "order-svc",
+      "ruleId": "FEIGN-001",
+      "category": "openfeign",
+      "severity": "critical",
+      "title": "@FeignClient \"inventory-svc\" 缺少降级配置",
+      "rationale": "无降级配置会导致服务雪崩",
+      "clientName": "inventory-svc",
+      "confidence": {
+        "score": 65,
+        "level": "medium",
+        "factors": [
+          {
+            "factor": "no_fallback",
+            "impact": -20
+          },
+          {
+            "factor": "no_factory",
+            "impact": -15
+          }
+        ]
+      },
+      "environment": "production"
+    },
+    {
+      "service": "inventory-svc",
+      "servicePath": "inventory-svc",
+      "ruleId": "NACOS-001",
+      "category": "nacos",
+      "severity": "critical",
+      "title": "Nacos 命名空间必须配置",
+      "rationale": "生产环境必须配置独立命名空间隔离",
+      "location": "inventory-svc",
+      "confidence": {
+        "score": 100,
+        "level": "high",
+        "factors": []
+      },
+      "environment": "production",
+      "isEnvironmentAdjusted": true
+    },
+    {
+      "service": "inventory-svc",
+      "servicePath": "inventory-svc",
+      "ruleId": "NACOS-003",
+      "category": "nacos",
+      "severity": "critical",
+      "title": "Nacos server-addr 不应使用 localhost (生产环境)",
+      "rationale": "生产环境应使用内网地址或域名",
+      "location": "inventory-svc",
+      "confidence": {
+        "score": 100,
+        "level": "high",
+        "factors": []
+      },
+      "environment": "production",
+      "isEnvironmentAdjusted": true
+    },
+    {
+      "service": "inventory-svc",
+      "servicePath": "inventory-svc",
+      "ruleId": "FEIGN-002",
+      "category": "openfeign",
+      "severity": "high",
+      "title": "Sentinel 或 Resilience4j 依赖必须存在",
+      "rationale": "无熔断降级依赖，fallback 不会生效",
+      "location": "inventory-svc",
+      "confidence": {
+        "score": 100,
+        "level": "high",
+        "factors": []
+      },
+      "environment": "production",
+      "isEnvironmentAdjusted": false
+    },
+    {
+      "service": "inventory-svc",
+      "servicePath": "inventory-svc",
+      "ruleId": "FEIGN-003",
+      "category": "openfeign",
+      "severity": "critical",
+      "title": "circuitbreaker.enabled 必须为 true",
+      "rationale": "2021.x+ 版本需显式启用",
+      "location": "inventory-svc",
+      "confidence": {
+        "score": 100,
+        "level": "high",
+        "factors": []
+      },
+      "environment": "production",
+      "isEnvironmentAdjusted": false
+    },
+    {
+      "service": "gateway-svc",
+      "servicePath": "gateway-svc",
+      "ruleId": "NACOS-003",
+      "category": "nacos",
+      "severity": "critical",
+      "title": "Nacos server-addr 不应使用 localhost (生产环境)",
+      "rationale": "生产环境应使用内网地址或域名",
+      "location": "gateway-svc",
+      "confidence": {
+        "score": 100,
+        "level": "high",
+        "factors": []
+      },
+      "environment": "production",
+      "isEnvironmentAdjusted": true
+    },
+    {
+      "service": "gateway-svc",
+      "servicePath": "gateway-svc",
+      "ruleId": "FEIGN-001",
+      "category": "openfeign",
+      "severity": "critical",
+      "title": "@FeignClient 必须配置 fallback 或 fallbackFactory",
+      "rationale": "无降级配置会导致服务雪崩",
+      "location": "gateway-svc",
+      "confidence": {
+        "score": 65,
+        "level": "medium",
+        "factors": [
+          {
+            "factor": "no_fallback",
+            "impact": -20
+          },
+          {
+            "factor": "no_factory",
+            "impact": -15
+          }
+        ]
+      },
+      "environment": "production",
+      "isEnvironmentAdjusted": true
+    },
+    {
+      "service": "gateway-svc",
+      "servicePath": "gateway-svc",
+      "ruleId": "FEIGN-003",
+      "category": "openfeign",
+      "severity": "critical",
+      "title": "circuitbreaker.enabled 必须为 true",
+      "rationale": "2021.x+ 版本需显式启用",
+      "location": "gateway-svc",
+      "confidence": {
+        "score": 100,
+        "level": "high",
+        "factors": []
+      },
+      "environment": "production",
+      "isEnvironmentAdjusted": false
+    },
+    {
+      "service": "gateway-svc",
+      "servicePath": "gateway-svc",
+      "ruleId": "HYSTRIX-001",
+      "category": "hystrix",
+      "severity": "high",
+      "title": "Hystrix 已进入维护模式，建议迁移",
+      "rationale": "Netflix Hystrix 自 2018 年停止维护",
+      "location": "gateway-svc",
+      "confidence": {
+        "score": 100,
+        "level": "high",
+        "factors": []
+      },
+      "environment": "production",
+      "isEnvironmentAdjusted": false
+    },
+    {
+      "service": "gateway-svc",
+      "servicePath": "gateway-svc",
+      "ruleId": "FEIGN-001",
+      "category": "openfeign",
+      "severity": "critical",
+      "title": "@FeignClient \"user-svc\" 缺少降级配置",
+      "rationale": "无降级配置会导致服务雪崩",
+      "clientName": "user-svc",
+      "confidence": {
+        "score": 65,
+        "level": "medium",
+        "factors": [
+          {
+            "factor": "no_fallback",
+            "impact": -20
+          },
+          {
+            "factor": "no_factory",
+            "impact": -15
+          }
+        ]
+      },
+      "environment": "production"
+    },
+    {
+      "service": "gateway-svc",
+      "servicePath": "gateway-svc",
+      "ruleId": "FEIGN-001",
+      "category": "openfeign",
+      "severity": "critical",
+      "title": "@FeignClient \"order-svc\" 缺少降级配置",
+      "rationale": "无降级配置会导致服务雪崩",
+      "clientName": "order-svc",
+      "confidence": {
+        "score": 65,
+        "level": "medium",
+        "factors": [
+          {
+            "factor": "no_fallback",
+            "impact": -20
+          },
+          {
+            "factor": "no_factory",
+            "impact": -15
+          }
+        ]
+      },
+      "environment": "production"
+    }
+  ],
+  "services": [
+    {
+      "name": "user-svc",
+      "path": "user-svc",
+      "pom": {
+        "hasOpenfeign": true,
+        "hasSentinel": true,
+        "hasHystrix": false,
+        "openfeignDeps": [
+          {
+            "groupId": "org.springframework.cloud",
+            "artifactId": "spring-cloud-starter-openfeign",
+            "version": "",
+            "scope": ""
+          }
+        ],
+        "sentinelDeps": [
+          {
+            "groupId": "com.alibaba.cloud",
+            "artifactId": "spring-cloud-starter-alibaba-sentinel",
+            "version": "",
+            "scope": ""
+          }
+        ],
+        "hystrixDeps": [],
+        "nacosDiscoveryDeps": [
+          {
+            "groupId": "com.alibaba.cloud",
+            "artifactId": "spring-cloud-starter-alibaba-nacos-discovery",
+            "version": "",
+            "scope": ""
+          }
+        ],
+        "nacosConfigDeps": []
+      },
+      "nacos": {
+        "discoveryAddr": "nacos-cluster.mall.internal:8848",
+        "discoveryNamespace": "prod"
+      },
+      "feignClients": [
+        {
+          "file": "user-svc\\src\\main\\java\\com\\mall\\user\\client\\NotifyClient.java",
+          "name": "notify-svc",
+          "path": "/api/notify",
+          "url": null,
+          "contextId": null,
+          "fallback": null,
+          "fallbackFactory": null,
+          "configuration": null,
+          "qualifiers": null,
+          "primary": null
+        },
+        {
+          "file": "user-svc\\src\\main\\java\\com\\mall\\user\\client\\AuthClient.java",
+          "name": "auth-svc",
+          "path": "/api/auth",
+          "url": null,
+          "contextId": null,
+          "fallback": null,
+          "fallbackFactory": "AuthServiceFallbackFactory",
+          "configuration": null,
+          "qualifiers": null,
+          "primary": null
+        }
+      ],
+      "summary": {
+        "totalFeignClients": 2,
+        "feignWithFallback": 0,
+        "feignWithFallbackFactory": 1,
+        "feignWithoutFallback": 1,
+        "feignFallbackConfigured": true,
+        "feignFallbackMissing": false,
+        "nacosDiscoveryConfigured": true,
+        "nacosConfigConfigured": false
+      }
+    },
+    {
+      "name": "payment-svc",
+      "path": "payment-svc",
+      "pom": {
+        "hasOpenfeign": true,
+        "hasSentinel": true,
+        "hasHystrix": false,
+        "openfeignDeps": [
+          {
+            "groupId": "org.springframework.cloud",
+            "artifactId": "spring-cloud-starter-openfeign",
+            "version": "",
+            "scope": ""
+          }
+        ],
+        "sentinelDeps": [
+          {
+            "groupId": "com.alibaba.cloud",
+            "artifactId": "spring-cloud-starter-alibaba-sentinel",
+            "version": "",
+            "scope": ""
+          }
+        ],
+        "hystrixDeps": [],
+        "nacosDiscoveryDeps": [
+          {
+            "groupId": "com.alibaba.cloud",
+            "artifactId": "spring-cloud-starter-alibaba-nacos-discovery",
+            "version": "",
+            "scope": ""
+          }
+        ],
+        "nacosConfigDeps": []
+      },
+      "nacos": {
+        "discoveryAddr": "nacos-cluster.mall.internal:8848",
+        "discoveryNamespace": "prod"
+      },
+      "feignClients": [
+        {
+          "file": "payment-svc\\src\\main\\java\\com\\mall\\payment\\client\\AccountClient.java",
+          "name": "account-svc",
+          "path": "/api/accounts",
+          "url": null,
+          "contextId": null,
+          "fallback": "AccountClientFallback",
+          "fallbackFactory": null,
+          "configuration": null,
+          "qualifiers": null,
+          "primary": null
+        }
+      ],
+      "summary": {
+        "totalFeignClients": 1,
+        "feignWithFallback": 1,
+        "feignWithFallbackFactory": 0,
+        "feignWithoutFallback": 0,
+        "feignFallbackConfigured": true,
+        "feignFallbackMissing": false,
+        "nacosDiscoveryConfigured": true,
+        "nacosConfigConfigured": false
+      }
+    },
+    {
+      "name": "order-svc",
+      "path": "order-svc",
+      "pom": {
+        "hasOpenfeign": true,
+        "hasSentinel": false,
+        "hasHystrix": false,
+        "openfeignDeps": [
+          {
+            "groupId": "org.springframework.cloud",
+            "artifactId": "spring-cloud-starter-openfeign",
+            "version": "",
+            "scope": ""
+          }
+        ],
+        "sentinelDeps": [],
+        "hystrixDeps": [],
+        "nacosDiscoveryDeps": [
+          {
+            "groupId": "com.alibaba.cloud",
+            "artifactId": "spring-cloud-starter-alibaba-nacos-discovery",
+            "version": "",
+            "scope": ""
+          }
+        ],
+        "nacosConfigDeps": [
+          {
+            "groupId": "com.alibaba.cloud",
+            "artifactId": "spring-cloud-starter-alibaba-nacos-config",
+            "version": "",
+            "scope": ""
+          }
+        ]
+      },
+      "nacos": {
+        "discoveryAddr": "127.0.0.1:8848",
+        "discoveryNamespace": "dev",
+        "configAddr": "127.0.0.1:8848",
+        "configNamespace": "dev"
+      },
+      "feignClients": [
+        {
+          "file": "order-svc\\src\\main\\java\\com\\mall\\order\\client\\PaymentClient.java",
+          "name": "payment-svc",
+          "path": "/api/payments",
+          "url": null,
+          "contextId": null,
+          "fallback": null,
+          "fallbackFactory": null,
+          "configuration": null,
+          "qualifiers": null,
+          "primary": null
+        },
+        {
+          "file": "order-svc\\src\\main\\java\\com\\mall\\order\\client\\InventoryClient.java",
+          "name": "inventory-svc",
+          "path": "/api/inventory",
+          "url": null,
+          "contextId": null,
+          "fallback": null,
+          "fallbackFactory": null,
+          "configuration": null,
+          "qualifiers": null,
+          "primary": null
+        }
+      ],
+      "summary": {
+        "totalFeignClients": 2,
+        "feignWithFallback": 0,
+        "feignWithFallbackFactory": 0,
+        "feignWithoutFallback": 2,
+        "feignFallbackConfigured": false,
+        "feignFallbackMissing": true,
+        "nacosDiscoveryConfigured": true,
+        "nacosConfigConfigured": true
+      }
+    },
+    {
+      "name": "inventory-svc",
+      "path": "inventory-svc",
+      "pom": {
+        "hasOpenfeign": true,
+        "hasSentinel": false,
+        "hasHystrix": false,
+        "openfeignDeps": [
+          {
+            "groupId": "org.springframework.cloud",
+            "artifactId": "spring-cloud-starter-openfeign",
+            "version": "",
+            "scope": ""
+          }
+        ],
+        "sentinelDeps": [],
+        "hystrixDeps": [],
+        "nacosDiscoveryDeps": [
+          {
+            "groupId": "com.alibaba.cloud",
+            "artifactId": "spring-cloud-starter-alibaba-nacos-discovery",
+            "version": "",
+            "scope": ""
+          }
+        ],
+        "nacosConfigDeps": []
+      },
+      "nacos": {
+        "discoveryAddr": "127.0.0.1:8848"
+      },
+      "feignClients": [],
+      "summary": {
+        "totalFeignClients": 0,
+        "feignWithFallback": 0,
+        "feignWithFallbackFactory": 0,
+        "feignWithoutFallback": 0,
+        "feignFallbackConfigured": false,
+        "feignFallbackMissing": false,
+        "nacosDiscoveryConfigured": true,
+        "nacosConfigConfigured": false
+      }
+    },
+    {
+      "name": "gateway-svc",
+      "path": "gateway-svc",
+      "pom": {
+        "hasOpenfeign": true,
+        "hasSentinel": false,
+        "hasHystrix": true,
+        "openfeignDeps": [
+          {
+            "groupId": "org.springframework.cloud",
+            "artifactId": "spring-cloud-starter-openfeign",
+            "version": "",
+            "scope": ""
+          }
+        ],
+        "sentinelDeps": [],
+        "hystrixDeps": [
+          {
+            "groupId": "org.springframework.cloud",
+            "artifactId": "spring-cloud-starter-netflix-hystrix",
+            "version": "",
+            "scope": ""
+          }
+        ],
+        "nacosDiscoveryDeps": [
+          {
+            "groupId": "com.alibaba.cloud",
+            "artifactId": "spring-cloud-starter-alibaba-nacos-discovery",
+            "version": "",
+            "scope": ""
+          }
+        ],
+        "nacosConfigDeps": []
+      },
+      "nacos": {
+        "discoveryAddr": "127.0.0.1:8848",
+        "discoveryNamespace": "public"
+      },
+      "feignClients": [
+        {
+          "file": "gateway-svc\\src\\main\\java\\com\\mall\\gateway\\client\\UserServiceClient.java",
+          "name": "user-svc",
+          "path": "/api/users",
+          "url": null,
+          "contextId": null,
+          "fallback": null,
+          "fallbackFactory": null,
+          "configuration": null,
+          "qualifiers": null,
+          "primary": null
+        },
+        {
+          "file": "gateway-svc\\src\\main\\java\\com\\mall\\gateway\\client\\OrderServiceClient.java",
+          "name": "order-svc",
+          "path": "/api/orders",
+          "url": null,
+          "contextId": null,
+          "fallback": null,
+          "fallbackFactory": null,
+          "configuration": null,
+          "qualifiers": null,
+          "primary": null
+        }
+      ],
+      "summary": {
+        "totalFeignClients": 2,
+        "feignWithFallback": 0,
+        "feignWithFallbackFactory": 0,
+        "feignWithoutFallback": 2,
+        "feignFallbackConfigured": false,
+        "feignFallbackMissing": true,
+        "nacosDiscoveryConfigured": true,
+        "nacosConfigConfigured": false
+      }
+    }
+  ],
+  "summary": {
+    "totalFindings": 18,
+    "totalWarnings": 0,
+    "bySeverity": {
+      "critical": 14,
+      "high": 4,
+      "medium": 0,
+      "low": 0,
+      "info": 0
+    },
+    "byCategory": {
+      "openfeign": 12,
+      "nacos": 5,
+      "hystrix": 1
+    },
+    "environmentBreakdown": {
+      "production": 18,
+      "development": 0,
+      "testing": 0,
+      "unknown": 0
+    },
+    "confidenceStats": {
+      "high": 12,
+      "medium": 6,
+      "low": 0
+    },
+    "score": 0,
+    "grade": "F"
+  },
+  "serviceGraph": {
+    "nodes": [
+      {
+        "id": "user-svc",
+        "type": "service",
+        "moduleCount": 1,
+        "feignClientCount": 2,
+        "hasCircuitBreaker": false
+      },
+      {
+        "id": "payment-svc",
+        "type": "service",
+        "moduleCount": 1,
+        "feignClientCount": 1,
+        "hasCircuitBreaker": false
+      },
+      {
+        "id": "order-svc",
+        "type": "service",
+        "moduleCount": 1,
+        "feignClientCount": 2,
+        "hasCircuitBreaker": false
+      },
+      {
+        "id": "inventory-svc",
+        "type": "service",
+        "moduleCount": 1,
+        "feignClientCount": 0,
+        "hasCircuitBreaker": false
+      },
+      {
+        "id": "gateway-svc",
+        "type": "service",
+        "moduleCount": 1,
+        "feignClientCount": 2,
+        "hasCircuitBreaker": false
+      }
+    ],
+    "edges": [
+      {
+        "from": "user-svc",
+        "to": "notify-svc",
+        "hasFallback": false,
+        "methodCount": 0
+      },
+      {
+        "from": "user-svc",
+        "to": "auth-svc",
+        "hasFallback": true,
+        "methodCount": 0
+      },
+      {
+        "from": "payment-svc",
+        "to": "account-svc",
+        "hasFallback": true,
+        "methodCount": 0
+      },
+      {
+        "from": "order-svc",
+        "to": "payment-svc",
+        "hasFallback": false,
+        "methodCount": 0
+      },
+      {
+        "from": "order-svc",
+        "to": "inventory-svc",
+        "hasFallback": false,
+        "methodCount": 0
+      },
+      {
+        "from": "gateway-svc",
+        "to": "user-svc",
+        "hasFallback": false,
+        "methodCount": 0
+      },
+      {
+        "from": "gateway-svc",
+        "to": "order-svc",
+        "hasFallback": false,
+        "methodCount": 0
+      }
+    ],
+    "metrics": {
+      "mostCalledService": "notify-svc",
+      "maxCalls": 1,
+      "servicesWithoutFallback": [
+        "notify-svc",
+        "payment-svc",
+        "inventory-svc",
+        "user-svc",
+        "order-svc"
+      ],
+      "singlePointsOfFailure": []
+    }
+  }
+}

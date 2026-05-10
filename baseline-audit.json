@@ -1,0 +1,442 @@
+{
+  "findings": [
+    {
+      "ruleId": "FEIGN-001",
+      "severity": "critical",
+      "category": "openfeign",
+      "title": "@FeignClient \"notify-svc\" 缺少降级配置",
+      "rationale": "Spring Cloud Alibaba 2021.x+ 强制要求所有 Feign 客户端具备熔断降级能力。未配置 fallback 的接口在被调用服务宕机、超时、线程池满时会直接抛出异常，导致上游服务雪崩。Sentinel 降级规则依赖 fallback 类执行回退逻辑。参考：Spring Cloud Circuit Breaker 官方文档。",
+      "service": "user-svc",
+      "servicePath": "user-svc",
+      "details": {
+        "feignClient": {
+          "file": "user-svc\\src\\main\\java\\com\\mall\\user\\client\\NotifyClient.java",
+          "name": "notify-svc",
+          "path": "/api/notify",
+          "url": null,
+          "contextId": null,
+          "fallback": null,
+          "fallbackFactory": null,
+          "configuration": null,
+          "qualifiers": null,
+          "primary": null
+        },
+        "riskAssessment": {
+          "riskLevel": "medium",
+          "domain": "通知/消息",
+          "clientName": "notify-svc",
+          "callerService": "user-svc",
+          "chainReactions": [
+            "① 当被调服务不可用时，调用 notify-svc 的 /api/notify 接口 直接抛出异常（无 fallback 兜底）",
+            "② 请求线程被阻塞（默认超时前一直等待），user-svc 的 Tomcat/Undertow 线程池逐步耗尽",
+            "③ user-svc 自身变得不可用，上游调用方（如 API Gateway）也开始超时",
+            "④ 业务影响：通知漏发 → 用户不知道订单状态 → 体验降级（非阻断）",
+            "⑤ 无降级时恢复依赖重启整个集群，而配置了 fallback 的服务可在被调恢复后自动愈合"
+          ],
+          "mitigation": [
+            "为 @FeignClient(name = \"notify-svc\") 添加 fallback = Notify-svcFallback.class",
+            "Notify-svcFallback 类应实现该 Feign 接口，并返回合理的兜底值（如空列表、缓存数据、默认对象）",
+            "在 pom.xml 中确认已引入 spring-cloud-starter-alibaba-sentinel",
+            "在 application.yml 中确认 feign.sentinel.enabled = true"
+          ]
+        }
+      }
+    },
+    {
+      "ruleId": "NACOS-002",
+      "severity": "high",
+      "category": "nacos",
+      "title": "Nacos 配置中心命名空间应与服务发现分离（推荐）",
+      "rationale": "配置中心涉及敏感信息（数据库密码、密钥等），官方建议使用独立命名空间隔离配置访问权限，避免服务发现 namespace 泄露配置数据。参考：Nacos 权限控制最佳实践。",
+      "service": "order-svc",
+      "servicePath": "order-svc",
+      "details": {
+        "discoveryNamespace": "dev",
+        "configNamespace": "dev",
+        "fix": "配置中心使用独立命名空间，将配置访问权限与服务发现隔离"
+      }
+    },
+    {
+      "ruleId": "NACOS-003",
+      "severity": "high",
+      "category": "nacos",
+      "title": "Nacos server-addr 不得为 localhost（生产环境）",
+      "rationale": "生产环境中 localhost 指向本机，会导致服务无法注册到远程 Nacos 集群，造成服务发现失败。应使用 Nacos 集群的 VIP/域名。",
+      "service": "order-svc",
+      "servicePath": "order-svc",
+      "details": {
+        "currentAddr": "127.0.0.1:8848",
+        "fix": "替换为 Nacos 集群地址（VIP/域名/内网 NLB）"
+      }
+    },
+    {
+      "ruleId": "FEIGN-001",
+      "severity": "critical",
+      "category": "openfeign",
+      "title": "每个 @FeignClient 必须配置 fallback 或 fallbackFactory",
+      "rationale": "Spring Cloud Alibaba 2021.x+ 强制要求所有 Feign 客户端具备熔断降级能力。未配置 fallback 的接口在被调用服务宕机、超时、线程池满时会直接抛出异常，导致上游服务雪崩。Sentinel 降级规则依赖 fallback 类执行回退逻辑。参考：Spring Cloud Circuit Breaker 官方文档。",
+      "service": "order-svc",
+      "servicePath": "order-svc",
+      "details": {
+        "affectedClients": [
+          "payment-svc",
+          "inventory-svc"
+        ],
+        "fix": "为每个 @FeignClient 添加 fallback = XxxFallback.class 或 fallbackFactory = XxxFallbackFactory.class"
+      }
+    },
+    {
+      "ruleId": "FEIGN-002",
+      "severity": "high",
+      "category": "openfeign",
+      "title": "Sentinel 依赖必须显式声明（spring-cloud-starter-alibaba-sentinel）",
+      "rationale": "Spring Cloud Alibaba 2021.x 默认以 Sentinel 为熔断降级实现。若只引入 openfeign 而未引入 sentinel 依赖，feign.sentinel.enabled 默认为 false，fallback 配置不会生效，降级逻辑形同虚设。",
+      "service": "order-svc",
+      "servicePath": "order-svc",
+      "details": {
+        "hasSentinelDep": false,
+        "fix": "pom.xml 添加依赖: com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel"
+      }
+    },
+    {
+      "ruleId": "FEIGN-003",
+      "severity": "critical",
+      "category": "openfeign",
+      "title": "Spring Cloud OpenFeign circuitbreaker.enabled 必须为 true",
+      "rationale": "从 Spring Cloud 2021.x 开始，需要显式启用 circuitbreaker.enabled=true 才能让 Fallback 生效。根据官方 issue (#3979)，默认值为 false会导致 OpenFeign 客户端不会被 Spring Cloud CircuitBreaker 包装，Fallback 不会触发。参考：Spring Cloud OpenFeign 官方文档。",
+      "service": "order-svc",
+      "servicePath": "order-svc",
+      "details": {
+        "fallbackNames": [],
+        "fix": "为不同接口创建独立的 fallback 类，命名体现接口用途"
+      }
+    },
+    {
+      "ruleId": "FEIGN-001",
+      "severity": "critical",
+      "category": "openfeign",
+      "title": "@FeignClient \"payment-svc\" 缺少降级配置",
+      "rationale": "Spring Cloud Alibaba 2021.x+ 强制要求所有 Feign 客户端具备熔断降级能力。未配置 fallback 的接口在被调用服务宕机、超时、线程池满时会直接抛出异常，导致上游服务雪崩。Sentinel 降级规则依赖 fallback 类执行回退逻辑。参考：Spring Cloud Circuit Breaker 官方文档。",
+      "service": "order-svc",
+      "servicePath": "order-svc",
+      "details": {
+        "feignClient": {
+          "file": "order-svc\\src\\main\\java\\com\\mall\\order\\client\\PaymentClient.java",
+          "name": "payment-svc",
+          "path": "/api/payments",
+          "url": null,
+          "contextId": null,
+          "fallback": null,
+          "fallbackFactory": null,
+          "configuration": null,
+          "qualifiers": null,
+          "primary": null
+        },
+        "riskAssessment": {
+          "riskLevel": "critical",
+          "domain": "支付/结算",
+          "clientName": "payment-svc",
+          "callerService": "order-svc",
+          "chainReactions": [
+            "① 当被调服务不可用时，调用 payment-svc 的 /api/payments 接口 直接抛出异常（无 fallback 兜底）",
+            "② 请求线程被阻塞（默认超时前一直等待），order-svc 的 Tomcat/Undertow 线程池逐步耗尽",
+            "③ order-svc 自身变得不可用，上游调用方（如 API Gateway）也开始超时",
+            "④ 业务影响：整个支付链路中断 → 订单无法完成 → 营收损失",
+            "⑤ 无降级时恢复依赖重启整个集群，而配置了 fallback 的服务可在被调恢复后自动愈合"
+          ],
+          "mitigation": [
+            "为 @FeignClient(name = \"payment-svc\") 添加 fallback = Payment-svcFallback.class",
+            "Payment-svcFallback 类应实现该 Feign 接口，并返回合理的兜底值（如空列表、缓存数据、默认对象）",
+            "在 pom.xml 中确认已引入 spring-cloud-starter-alibaba-sentinel",
+            "在 application.yml 中确认 feign.sentinel.enabled = true",
+            "⚠️ 建议在 Sentinel Dashboard 中为该接口配置线程数隔离（thread）或信号量隔离，防止单个接口耗尽所有线程",
+            "⚠️ 建议设置合理的超时时间（feign.client.config.default.connectTimeout / readTimeout），避免无限期等待"
+          ]
+        }
+      }
+    },
+    {
+      "ruleId": "FEIGN-001",
+      "severity": "critical",
+      "category": "openfeign",
+      "title": "@FeignClient \"inventory-svc\" 缺少降级配置",
+      "rationale": "Spring Cloud Alibaba 2021.x+ 强制要求所有 Feign 客户端具备熔断降级能力。未配置 fallback 的接口在被调用服务宕机、超时、线程池满时会直接抛出异常，导致上游服务雪崩。Sentinel 降级规则依赖 fallback 类执行回退逻辑。参考：Spring Cloud Circuit Breaker 官方文档。",
+      "service": "order-svc",
+      "servicePath": "order-svc",
+      "details": {
+        "feignClient": {
+          "file": "order-svc\\src\\main\\java\\com\\mall\\order\\client\\InventoryClient.java",
+          "name": "inventory-svc",
+          "path": "/api/inventory",
+          "url": null,
+          "contextId": null,
+          "fallback": null,
+          "fallbackFactory": null,
+          "configuration": null,
+          "qualifiers": null,
+          "primary": null
+        },
+        "riskAssessment": {
+          "riskLevel": "high",
+          "domain": "库存/商品",
+          "clientName": "inventory-svc",
+          "callerService": "order-svc",
+          "chainReactions": [
+            "① 当被调服务不可用时，调用 inventory-svc 的 /api/inventory 接口 直接抛出异常（无 fallback 兜底）",
+            "② 请求线程被阻塞（默认超时前一直等待），order-svc 的 Tomcat/Undertow 线程池逐步耗尽",
+            "③ order-svc 自身变得不可用，上游调用方（如 API Gateway）也开始超时",
+            "④ 业务影响：库存查询失败 → 超卖/少卖 → 订单异常 → 客诉",
+            "⑤ 无降级时恢复依赖重启整个集群，而配置了 fallback 的服务可在被调恢复后自动愈合"
+          ],
+          "mitigation": [
+            "为 @FeignClient(name = \"inventory-svc\") 添加 fallback = Inventory-svcFallback.class",
+            "Inventory-svcFallback 类应实现该 Feign 接口，并返回合理的兜底值（如空列表、缓存数据、默认对象）",
+            "在 pom.xml 中确认已引入 spring-cloud-starter-alibaba-sentinel",
+            "在 application.yml 中确认 feign.sentinel.enabled = true"
+          ]
+        }
+      }
+    },
+    {
+      "ruleId": "NACOS-001",
+      "severity": "critical",
+      "category": "nacos",
+      "title": "Nacos 命名空间必须配置（禁止使用空 namespace / public 保留空间）",
+      "rationale": "Spring Cloud Alibaba 官方建议按环境（dev/test/staging/prod）配置独立命名空间，实现服务治理层面的逻辑隔离。使用空 namespace 会导致服务混入 public 保留空间，存在跨环境调用的风险。参考：Nacos 官方文档 § 命名空间。",
+      "service": "inventory-svc",
+      "servicePath": "inventory-svc",
+      "details": {
+        "currentNamespace": "(空)",
+        "fix": "为每个环境配置独立 namespace，如 dev / test / prod"
+      }
+    },
+    {
+      "ruleId": "NACOS-003",
+      "severity": "high",
+      "category": "nacos",
+      "title": "Nacos server-addr 不得为 localhost（生产环境）",
+      "rationale": "生产环境中 localhost 指向本机，会导致服务无法注册到远程 Nacos 集群，造成服务发现失败。应使用 Nacos 集群的 VIP/域名。",
+      "service": "inventory-svc",
+      "servicePath": "inventory-svc",
+      "details": {
+        "currentAddr": "127.0.0.1:8848",
+        "fix": "替换为 Nacos 集群地址（VIP/域名/内网 NLB）"
+      }
+    },
+    {
+      "ruleId": "FEIGN-001",
+      "severity": "critical",
+      "category": "openfeign",
+      "title": "每个 @FeignClient 必须配置 fallback 或 fallbackFactory",
+      "rationale": "Spring Cloud Alibaba 2021.x+ 强制要求所有 Feign 客户端具备熔断降级能力。未配置 fallback 的接口在被调用服务宕机、超时、线程池满时会直接抛出异常，导致上游服务雪崩。Sentinel 降级规则依赖 fallback 类执行回退逻辑。参考：Spring Cloud Circuit Breaker 官方文档。",
+      "service": "inventory-svc",
+      "servicePath": "inventory-svc",
+      "details": {
+        "affectedClients": [],
+        "fix": "为每个 @FeignClient 添加 fallback = XxxFallback.class 或 fallbackFactory = XxxFallbackFactory.class"
+      }
+    },
+    {
+      "ruleId": "FEIGN-002",
+      "severity": "high",
+      "category": "openfeign",
+      "title": "Sentinel 依赖必须显式声明（spring-cloud-starter-alibaba-sentinel）",
+      "rationale": "Spring Cloud Alibaba 2021.x 默认以 Sentinel 为熔断降级实现。若只引入 openfeign 而未引入 sentinel 依赖，feign.sentinel.enabled 默认为 false，fallback 配置不会生效，降级逻辑形同虚设。",
+      "service": "inventory-svc",
+      "servicePath": "inventory-svc",
+      "details": {
+        "hasSentinelDep": false,
+        "fix": "pom.xml 添加依赖: com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel"
+      }
+    },
+    {
+      "ruleId": "FEIGN-003",
+      "severity": "critical",
+      "category": "openfeign",
+      "title": "Spring Cloud OpenFeign circuitbreaker.enabled 必须为 true",
+      "rationale": "从 Spring Cloud 2021.x 开始，需要显式启用 circuitbreaker.enabled=true 才能让 Fallback 生效。根据官方 issue (#3979)，默认值为 false会导致 OpenFeign 客户端不会被 Spring Cloud CircuitBreaker 包装，Fallback 不会触发。参考：Spring Cloud OpenFeign 官方文档。",
+      "service": "inventory-svc",
+      "servicePath": "inventory-svc",
+      "details": {
+        "fallbackNames": [],
+        "fix": "为不同接口创建独立的 fallback 类，命名体现接口用途"
+      }
+    },
+    {
+      "ruleId": "NACOS-003",
+      "severity": "high",
+      "category": "nacos",
+      "title": "Nacos server-addr 不得为 localhost（生产环境）",
+      "rationale": "生产环境中 localhost 指向本机，会导致服务无法注册到远程 Nacos 集群，造成服务发现失败。应使用 Nacos 集群的 VIP/域名。",
+      "service": "gateway-svc",
+      "servicePath": "gateway-svc",
+      "details": {
+        "currentAddr": "127.0.0.1:8848",
+        "fix": "替换为 Nacos 集群地址（VIP/域名/内网 NLB）"
+      }
+    },
+    {
+      "ruleId": "FEIGN-001",
+      "severity": "critical",
+      "category": "openfeign",
+      "title": "每个 @FeignClient 必须配置 fallback 或 fallbackFactory",
+      "rationale": "Spring Cloud Alibaba 2021.x+ 强制要求所有 Feign 客户端具备熔断降级能力。未配置 fallback 的接口在被调用服务宕机、超时、线程池满时会直接抛出异常，导致上游服务雪崩。Sentinel 降级规则依赖 fallback 类执行回退逻辑。参考：Spring Cloud Circuit Breaker 官方文档。",
+      "service": "gateway-svc",
+      "servicePath": "gateway-svc",
+      "details": {
+        "affectedClients": [
+          "user-svc",
+          "order-svc"
+        ],
+        "fix": "为每个 @FeignClient 添加 fallback = XxxFallback.class 或 fallbackFactory = XxxFallbackFactory.class"
+      }
+    },
+    {
+      "ruleId": "FEIGN-002",
+      "severity": "high",
+      "category": "openfeign",
+      "title": "Sentinel 依赖必须显式声明（spring-cloud-starter-alibaba-sentinel）",
+      "rationale": "Spring Cloud Alibaba 2021.x 默认以 Sentinel 为熔断降级实现。若只引入 openfeign 而未引入 sentinel 依赖，feign.sentinel.enabled 默认为 false，fallback 配置不会生效，降级逻辑形同虚设。",
+      "service": "gateway-svc",
+      "servicePath": "gateway-svc",
+      "details": {
+        "hasSentinelDep": false,
+        "fix": "pom.xml 添加依赖: com.alibaba.cloud:spring-cloud-starter-alibaba-sentinel"
+      }
+    },
+    {
+      "ruleId": "HYSTRIX-001",
+      "severity": "high",
+      "category": "hystrix",
+      "title": "Hystrix 已进入维护模式，必须迁移到 Sentinel",
+      "rationale": "Netflix Hystrix 自 2018 年起进入维护模式，不再接受新功能。Spring Cloud 2021.x 官方推荐使用 Resilience4j 或 Sentinel 替代。继续使用 Hystrix 会导致安全漏洞无法修复和社区支持缺失。",
+      "service": "gateway-svc",
+      "servicePath": "gateway-svc",
+      "details": {
+        "hystrixDeps": [
+          "spring-cloud-starter-netflix-hystrix"
+        ],
+        "fix": "移除 hystrix 依赖，迁移至 Sentinel (spring-cloud-starter-alibaba-sentinel)"
+      }
+    },
+    {
+      "ruleId": "FEIGN-003",
+      "severity": "critical",
+      "category": "openfeign",
+      "title": "Spring Cloud OpenFeign circuitbreaker.enabled 必须为 true",
+      "rationale": "从 Spring Cloud 2021.x 开始，需要显式启用 circuitbreaker.enabled=true 才能让 Fallback 生效。根据官方 issue (#3979)，默认值为 false会导致 OpenFeign 客户端不会被 Spring Cloud CircuitBreaker 包装，Fallback 不会触发。参考：Spring Cloud OpenFeign 官方文档。",
+      "service": "gateway-svc",
+      "servicePath": "gateway-svc",
+      "details": {
+        "fallbackNames": [],
+        "fix": "为不同接口创建独立的 fallback 类，命名体现接口用途"
+      }
+    },
+    {
+      "ruleId": "FEIGN-001",
+      "severity": "critical",
+      "category": "openfeign",
+      "title": "@FeignClient \"user-svc\" 缺少降级配置",
+      "rationale": "Spring Cloud Alibaba 2021.x+ 强制要求所有 Feign 客户端具备熔断降级能力。未配置 fallback 的接口在被调用服务宕机、超时、线程池满时会直接抛出异常，导致上游服务雪崩。Sentinel 降级规则依赖 fallback 类执行回退逻辑。参考：Spring Cloud Circuit Breaker 官方文档。",
+      "service": "gateway-svc",
+      "servicePath": "gateway-svc",
+      "details": {
+        "feignClient": {
+          "file": "gateway-svc\\src\\main\\java\\com\\mall\\gateway\\client\\UserServiceClient.java",
+          "name": "user-svc",
+          "path": "/api/users",
+          "url": null,
+          "contextId": null,
+          "fallback": null,
+          "fallbackFactory": null,
+          "configuration": null,
+          "qualifiers": null,
+          "primary": null
+        },
+        "riskAssessment": {
+          "riskLevel": "critical",
+          "domain": "用户/认证",
+          "clientName": "user-svc",
+          "callerService": "gateway-svc",
+          "chainReactions": [
+            "① 当被调服务不可用时，调用 user-svc 的 /api/users 接口 直接抛出异常（无 fallback 兜底）",
+            "② 请求线程被阻塞（默认超时前一直等待），gateway-svc 的 Tomcat/Undertow 线程池逐步耗尽",
+            "③ gateway-svc 自身变得不可用，上游调用方（如 API Gateway）也开始超时",
+            "④ 业务影响：认证鉴权失败 → 所有需要登录的接口不可用 → 全站不可用",
+            "⑤ 无降级时恢复依赖重启整个集群，而配置了 fallback 的服务可在被调恢复后自动愈合"
+          ],
+          "mitigation": [
+            "为 @FeignClient(name = \"user-svc\") 添加 fallback = User-svcFallback.class",
+            "User-svcFallback 类应实现该 Feign 接口，并返回合理的兜底值（如空列表、缓存数据、默认对象）",
+            "在 pom.xml 中确认已引入 spring-cloud-starter-alibaba-sentinel",
+            "在 application.yml 中确认 feign.sentinel.enabled = true",
+            "⚠️ 建议在 Sentinel Dashboard 中为该接口配置线程数隔离（thread）或信号量隔离，防止单个接口耗尽所有线程",
+            "⚠️ 建议设置合理的超时时间（feign.client.config.default.connectTimeout / readTimeout），避免无限期等待"
+          ]
+        }
+      }
+    },
+    {
+      "ruleId": "FEIGN-001",
+      "severity": "critical",
+      "category": "openfeign",
+      "title": "@FeignClient \"order-svc\" 缺少降级配置",
+      "rationale": "Spring Cloud Alibaba 2021.x+ 强制要求所有 Feign 客户端具备熔断降级能力。未配置 fallback 的接口在被调用服务宕机、超时、线程池满时会直接抛出异常，导致上游服务雪崩。Sentinel 降级规则依赖 fallback 类执行回退逻辑。参考：Spring Cloud Circuit Breaker 官方文档。",
+      "service": "gateway-svc",
+      "servicePath": "gateway-svc",
+      "details": {
+        "feignClient": {
+          "file": "gateway-svc\\src\\main\\java\\com\\mall\\gateway\\client\\OrderServiceClient.java",
+          "name": "order-svc",
+          "path": "/api/orders",
+          "url": null,
+          "contextId": null,
+          "fallback": null,
+          "fallbackFactory": null,
+          "configuration": null,
+          "qualifiers": null,
+          "primary": null
+        },
+        "riskAssessment": {
+          "riskLevel": "critical",
+          "domain": "订单/预订",
+          "clientName": "order-svc",
+          "callerService": "gateway-svc",
+          "chainReactions": [
+            "① 当被调服务不可用时，调用 order-svc 的 /api/orders 接口 直接抛出异常（无 fallback 兜底）",
+            "② 请求线程被阻塞（默认超时前一直等待），gateway-svc 的 Tomcat/Undertow 线程池逐步耗尽",
+            "③ gateway-svc 自身变得不可用，上游调用方（如 API Gateway）也开始超时",
+            "④ 业务影响：订单创建失败 → 库存未锁定 → 用户体验受损 → 客诉/流失",
+            "⑤ 无降级时恢复依赖重启整个集群，而配置了 fallback 的服务可在被调恢复后自动愈合"
+          ],
+          "mitigation": [
+            "为 @FeignClient(name = \"order-svc\") 添加 fallback = Order-svcFallback.class",
+            "Order-svcFallback 类应实现该 Feign 接口，并返回合理的兜底值（如空列表、缓存数据、默认对象）",
+            "在 pom.xml 中确认已引入 spring-cloud-starter-alibaba-sentinel",
+            "在 application.yml 中确认 feign.sentinel.enabled = true",
+            "⚠️ 建议在 Sentinel Dashboard 中为该接口配置线程数隔离（thread）或信号量隔离，防止单个接口耗尽所有线程",
+            "⚠️ 建议设置合理的超时时间（feign.client.config.default.connectTimeout / readTimeout），避免无限期等待"
+          ]
+        }
+      }
+    }
+  ],
+  "summary": {
+    "totalFindings": 20,
+    "bySeverity": {
+      "critical": 12,
+      "high": 8,
+      "medium": 0,
+      "low": 0,
+      "info": 0
+    },
+    "byCategory": {
+      "openfeign": 14,
+      "nacos": 5,
+      "hystrix": 1
+    },
+    "score": 0,
+    "grade": "F — 不合格，高可用性无保障"
+  },
+  "standardsVersion": "Spring Cloud Alibaba 2021.x/2022.x"
+}

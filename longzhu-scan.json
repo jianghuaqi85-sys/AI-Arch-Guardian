@@ -1,0 +1,23 @@
+{
+  "projectRoot": "D:\\longzhu",
+  "scanTime": "2026-05-10T12:44:30.968Z",
+  "services": [],
+  "globalSummary": {
+    "projectRoot": "D:\\longzhu",
+    "totalModules": 0,
+    "totalFeignClients": 0,
+    "feignWithFallback": 0,
+    "feignWithFallbackFactory": 0,
+    "feignWithoutFallback": 0,
+    "modulesWithNacosDiscovery": 0,
+    "modulesWithNacosConfig": 0,
+    "modulesWithFeignFallbackMissing": 0,
+    "environment": {
+      "production": 0,
+      "development": 0,
+      "testing": 0,
+      "unknown": 0
+    },
+    "warnings": 0
+  }
+}

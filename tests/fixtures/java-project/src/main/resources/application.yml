@@ -1,0 +1,41 @@
+spring:
+  application:
+    name: demo-service
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+        namespace: dev
+        group: DEFAULT_GROUP
+      config:
+        server-addr: localhost:8848
+        namespace: dev-config
+        group: DEFAULT_GROUP
+        file-extension: yml
+    openfeign:
+      client:
+        config:
+          default:
+            connectTimeout: 5000
+            readTimeout: 5000
+      circuitbreaker:
+        enabled: true
+      compression:
+        request:
+          enabled: true
+        response:
+          enabled: true
+
+feign:
+  client:
+    config:
+      default:
+        loggerLevel: basic
+
+# Sentinel 配置
+sentinel:
+  transport:
+    dashboard: localhost:8080
+  eager: true
+  metric:
+    charset: UTF-8

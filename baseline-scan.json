@@ -1,0 +1,348 @@
+{
+  "projectRoot": "C:\\Users\\86198\\Desktop\\java项目文档\\microservice-mall",
+  "globalSummary": {
+    "projectRoot": "C:\\Users\\86198\\Desktop\\java项目文档\\microservice-mall",
+    "totalModules": 5,
+    "totalFeignClients": 7,
+    "feignWithFallback": 1,
+    "feignWithFallbackFactory": 1,
+    "feignWithoutFallback": 5,
+    "modulesWithNacosDiscovery": 5,
+    "modulesWithNacosConfig": 1,
+    "modulesWithFeignFallbackMissing": 2
+  },
+  "services": [
+    {
+      "name": "user-svc",
+      "path": "user-svc",
+      "pom": {
+        "hasOpenfeign": true,
+        "hasSentinel": true,
+        "hasHystrix": false,
+        "openfeignDeps": [
+          {
+            "groupId": "org.springframework.cloud",
+            "artifactId": "spring-cloud-starter-openfeign",
+            "version": "",
+            "scope": ""
+          }
+        ],
+        "sentinelDeps": [
+          {
+            "groupId": "com.alibaba.cloud",
+            "artifactId": "spring-cloud-starter-alibaba-sentinel",
+            "version": "",
+            "scope": ""
+          }
+        ],
+        "hystrixDeps": [],
+        "nacosDiscoveryDeps": [
+          {
+            "groupId": "com.alibaba.cloud",
+            "artifactId": "spring-cloud-starter-alibaba-nacos-discovery",
+            "version": "",
+            "scope": ""
+          }
+        ],
+        "nacosConfigDeps": []
+      },
+      "nacos": {
+        "discoveryAddr": "nacos-cluster.mall.internal:8848",
+        "discoveryNamespace": "prod"
+      },
+      "feignClients": [
+        {
+          "file": "user-svc\\src\\main\\java\\com\\mall\\user\\client\\NotifyClient.java",
+          "name": "notify-svc",
+          "path": "/api/notify",
+          "url": null,
+          "contextId": null,
+          "fallback": null,
+          "fallbackFactory": null,
+          "configuration": null,
+          "qualifiers": null,
+          "primary": null
+        },
+        {
+          "file": "user-svc\\src\\main\\java\\com\\mall\\user\\client\\AuthClient.java",
+          "name": "auth-svc",
+          "path": "/api/auth",
+          "url": null,
+          "contextId": null,
+          "fallback": null,
+          "fallbackFactory": "AuthServiceFallbackFactory",
+          "configuration": null,
+          "qualifiers": null,
+          "primary": null
+        }
+      ],
+      "summary": {
+        "totalFeignClients": 2,
+        "feignWithFallback": 0,
+        "feignWithFallbackFactory": 1,
+        "feignWithoutFallback": 1,
+        "feignFallbackConfigured": true,
+        "feignFallbackMissing": false,
+        "nacosDiscoveryConfigured": true,
+        "nacosConfigConfigured": false
+      }
+    },
+    {
+      "name": "payment-svc",
+      "path": "payment-svc",
+      "pom": {
+        "hasOpenfeign": true,
+        "hasSentinel": true,
+        "hasHystrix": false,
+        "openfeignDeps": [
+          {
+            "groupId": "org.springframework.cloud",
+            "artifactId": "spring-cloud-starter-openfeign",
+            "version": "",
+            "scope": ""
+          }
+        ],
+        "sentinelDeps": [
+          {
+            "groupId": "com.alibaba.cloud",
+            "artifactId": "spring-cloud-starter-alibaba-sentinel",
+            "version": "",
+            "scope": ""
+          }
+        ],
+        "hystrixDeps": [],
+        "nacosDiscoveryDeps": [
+          {
+            "groupId": "com.alibaba.cloud",
+            "artifactId": "spring-cloud-starter-alibaba-nacos-discovery",
+            "version": "",
+            "scope": ""
+          }
+        ],
+        "nacosConfigDeps": []
+      },
+      "nacos": {
+        "discoveryAddr": "nacos-cluster.mall.internal:8848",
+        "discoveryNamespace": "prod"
+      },
+      "feignClients": [
+        {
+          "file": "payment-svc\\src\\main\\java\\com\\mall\\payment\\client\\AccountClient.java",
+          "name": "account-svc",
+          "path": "/api/accounts",
+          "url": null,
+          "contextId": null,
+          "fallback": "AccountClientFallback",
+          "fallbackFactory": null,
+          "configuration": null,
+          "qualifiers": null,
+          "primary": null
+        }
+      ],
+      "summary": {
+        "totalFeignClients": 1,
+        "feignWithFallback": 1,
+        "feignWithFallbackFactory": 0,
+        "feignWithoutFallback": 0,
+        "feignFallbackConfigured": true,
+        "feignFallbackMissing": false,
+        "nacosDiscoveryConfigured": true,
+        "nacosConfigConfigured": false
+      }
+    },
+    {
+      "name": "order-svc",
+      "path": "order-svc",
+      "pom": {
+        "hasOpenfeign": true,
+        "hasSentinel": false,
+        "hasHystrix": false,
+        "openfeignDeps": [
+          {
+            "groupId": "org.springframework.cloud",
+            "artifactId": "spring-cloud-starter-openfeign",
+            "version": "",
+            "scope": ""
+          }
+        ],
+        "sentinelDeps": [],
+        "hystrixDeps": [],
+        "nacosDiscoveryDeps": [
+          {
+            "groupId": "com.alibaba.cloud",
+            "artifactId": "spring-cloud-starter-alibaba-nacos-discovery",
+            "version": "",
+            "scope": ""
+          }
+        ],
+        "nacosConfigDeps": [
+          {
+            "groupId": "com.alibaba.cloud",
+            "artifactId": "spring-cloud-starter-alibaba-nacos-config",
+            "version": "",
+            "scope": ""
+          }
+        ]
+      },
+      "nacos": {
+        "discoveryAddr": "127.0.0.1:8848",
+        "discoveryNamespace": "dev",
+        "configAddr": "127.0.0.1:8848",
+        "configNamespace": "dev"
+      },
+      "feignClients": [
+        {
+          "file": "order-svc\\src\\main\\java\\com\\mall\\order\\client\\PaymentClient.java",
+          "name": "payment-svc",
+          "path": "/api/payments",
+          "url": null,
+          "contextId": null,
+          "fallback": null,
+          "fallbackFactory": null,
+          "configuration": null,
+          "qualifiers": null,
+          "primary": null
+        },
+        {
+          "file": "order-svc\\src\\main\\java\\com\\mall\\order\\client\\InventoryClient.java",
+          "name": "inventory-svc",
+          "path": "/api/inventory",
+          "url": null,
+          "contextId": null,
+          "fallback": null,
+          "fallbackFactory": null,
+          "configuration": null,
+          "qualifiers": null,
+          "primary": null
+        }
+      ],
+      "summary": {
+        "totalFeignClients": 2,
+        "feignWithFallback": 0,
+        "feignWithFallbackFactory": 0,
+        "feignWithoutFallback": 2,
+        "feignFallbackConfigured": false,
+        "feignFallbackMissing": true,
+        "nacosDiscoveryConfigured": true,
+        "nacosConfigConfigured": true
+      }
+    },
+    {
+      "name": "inventory-svc",
+      "path": "inventory-svc",
+      "pom": {
+        "hasOpenfeign": true,
+        "hasSentinel": false,
+        "hasHystrix": false,
+        "openfeignDeps": [
+          {
+            "groupId": "org.springframework.cloud",
+            "artifactId": "spring-cloud-starter-openfeign",
+            "version": "",
+            "scope": ""
+          }
+        ],
+        "sentinelDeps": [],
+        "hystrixDeps": [],
+        "nacosDiscoveryDeps": [
+          {
+            "groupId": "com.alibaba.cloud",
+            "artifactId": "spring-cloud-starter-alibaba-nacos-discovery",
+            "version": "",
+            "scope": ""
+          }
+        ],
+        "nacosConfigDeps": []
+      },
+      "nacos": {
+        "discoveryAddr": "127.0.0.1:8848"
+      },
+      "feignClients": [],
+      "summary": {
+        "totalFeignClients": 0,
+        "feignWithFallback": 0,
+        "feignWithFallbackFactory": 0,
+        "feignWithoutFallback": 0,
+        "feignFallbackConfigured": false,
+        "feignFallbackMissing": false,
+        "nacosDiscoveryConfigured": true,
+        "nacosConfigConfigured": false
+      }
+    },
+    {
+      "name": "gateway-svc",
+      "path": "gateway-svc",
+      "pom": {
+        "hasOpenfeign": true,
+        "hasSentinel": false,
+        "hasHystrix": true,
+        "openfeignDeps": [
+          {
+            "groupId": "org.springframework.cloud",
+            "artifactId": "spring-cloud-starter-openfeign",
+            "version": "",
+            "scope": ""
+          }
+        ],
+        "sentinelDeps": [],
+        "hystrixDeps": [
+          {
+            "groupId": "org.springframework.cloud",
+            "artifactId": "spring-cloud-starter-netflix-hystrix",
+            "version": "",
+            "scope": ""
+          }
+        ],
+        "nacosDiscoveryDeps": [
+          {
+            "groupId": "com.alibaba.cloud",
+            "artifactId": "spring-cloud-starter-alibaba-nacos-discovery",
+            "version": "",
+            "scope": ""
+          }
+        ],
+        "nacosConfigDeps": []
+      },
+      "nacos": {
+        "discoveryAddr": "127.0.0.1:8848",
+        "discoveryNamespace": "public"
+      },
+      "feignClients": [
+        {
+          "file": "gateway-svc\\src\\main\\java\\com\\mall\\gateway\\client\\UserServiceClient.java",
+          "name": "user-svc",
+          "path": "/api/users",
+          "url": null,
+          "contextId": null,
+          "fallback": null,
+          "fallbackFactory": null,
+          "configuration": null,
+          "qualifiers": null,
+          "primary": null
+        },
+        {
+          "file": "gateway-svc\\src\\main\\java\\com\\mall\\gateway\\client\\OrderServiceClient.java",
+          "name": "order-svc",
+          "path": "/api/orders",
+          "url": null,
+          "contextId": null,
+          "fallback": null,
+          "fallbackFactory": null,
+          "configuration": null,
+          "qualifiers": null,
+          "primary": null
+        }
+      ],
+      "summary": {
+        "totalFeignClients": 2,
+        "feignWithFallback": 0,
+        "feignWithFallbackFactory": 0,
+        "feignWithoutFallback": 2,
+        "feignFallbackConfigured": false,
+        "feignFallbackMissing": true,
+        "nacosDiscoveryConfigured": true,
+        "nacosConfigConfigured": false
+      }
+    }
+  ]
+}

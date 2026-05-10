@@ -1,0 +1,36 @@
+{
+  "name": "arch-guardian",
+  "version": "1.0.0",
+  "description": "AI-Arch-Guardian: scan Java microservice projects for OpenFeign fallback gaps and Nacos configuration",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "scan": "node src/enhanced-scanner.js",
+    "audit": "node src/enhanced-auditor.js",
+    "report": "node reporter.js",
+    "patch": "node patcher.js",
+    "check": "node index.js",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "scan:original": "node scanner.js",
+    "audit:original": "node auditor.js",
+    "full": "node src/enhanced-scanner.js && node src/enhanced-audit.js"
+  },
+  "keywords": ["microservices", "spring-cloud", "openfeign", "nacos", "architecture"],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "fast-xml-parser": "^5.7.3",
+    "glob": "^13.0.6",
+    "js-yaml": "^4.1.1",
+    "java-parser": "^1.4.0"
+  },
+  "devDependencies": {
+    "vitest": "^3.0.0",
+    "eslint": "^9.0.0"
+  }
+}

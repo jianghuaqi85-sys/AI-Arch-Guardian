@@ -1,0 +1,942 @@
+{
+  "standardsVersion": "Spring Cloud Alibaba 2022.x Enhanced",
+  "projectRoot": "C:\\Users\\86198\\Desktop\\java项目文档\\microservice-mall",
+  "detectedEnvironment": "production",
+  "findings": [
+    {
+      "service": "user-svc",
+      "servicePath": "C:\\Users\\86198\\Desktop\\java项目文档\\microservice-mall\\user-svc",
+      "ruleId": "FEIGN-001",
+      "category": "openfeign",
+      "severity": "critical",
+      "title": "@FeignClient \"notify-svc\" 缺少降级配置",
+      "rationale": "无降级配置会导致服务雪崩",
+      "clientName": "notify-svc",
+      "confidence": {
+        "score": 80,
+        "level": "high",
+        "factors": [
+          {
+            "factor": "no_fallback",
+            "impact": -20
+          }
+        ]
+      },
+      "environment": "production"
+    },
+    {
+      "service": "order-svc",
+      "servicePath": "C:\\Users\\86198\\Desktop\\java项目文档\\microservice-mall\\order-svc",
+      "ruleId": "NACOS-002",
+      "category": "nacos",
+      "severity": "high",
+      "title": "Nacos 配置中心命名空间应与服务发现分离",
+      "rationale": "配置涉及敏感信息，应独立隔离",
+      "location": "C:\\Users\\86198\\Desktop\\java项目文档\\microservice-mall\\order-svc",
+      "confidence": {
+        "score": 100,
+        "level": "high",
+        "factors": []
+      },
+      "environment": "development",
+      "isEnvironmentAdjusted": false
+    },
+    {
+      "service": "order-svc",
+      "servicePath": "C:\\Users\\86198\\Desktop\\java项目文档\\microservice-mall\\order-svc",
+      "ruleId": "FEIGN-001",
+      "category": "openfeign",
+      "severity": "warning",
+      "title": "@FeignClient 必须配置 fallback 或 fallbackFactory",
+      "rationale": "无降级配置会导致服务雪崩",
+      "location": "C:\\Users\\86198\\Desktop\\java项目文档\\microservice-mall\\order-svc",
+      "confidence": {
+        "score": 65,
+        "level": "medium",
+        "factors": [
+          {
+            "factor": "no_fallback",
+            "impact": -20
+          },
+          {
+            "factor": "no_factory",
+            "impact": -15
+          }
+        ]
+      },
+      "environment": "development",
+      "isEnvironmentAdjusted": true
+    },
+    {
+      "service": "order-svc",
+      "servicePath": "C:\\Users\\86198\\Desktop\\java项目文档\\microservice-mall\\order-svc",
+      "ruleId": "FEIGN-002",
+      "category": "openfeign",
+      "severity": "high",
+      "title": "Sentinel 或 Resilience4j 依赖必须存在",
+      "rationale": "无熔断降级依赖，fallback 不会生效",
+      "location": "C:\\Users\\86198\\Desktop\\java项目文档\\microservice-mall\\order-svc",
+      "confidence": {
+        "score": 100,
+        "level": "high",
+        "factors": []
+      },
+      "environment": "development",
+      "isEnvironmentAdjusted": false
+    },
+    {
+      "service": "order-svc",
+      "servicePath": "C:\\Users\\86198\\Desktop\\java项目文档\\microservice-mall\\order-svc",
+      "ruleId": "FEIGN-003",
+      "category": "openfeign",
+      "severity": "critical",
+      "title": "circuitbreaker.enabled 必须为 true",
+      "rationale": "2021.x+ 版本需显式启用",
+      "location": "C:\\Users\\86198\\Desktop\\java项目文档\\microservice-mall\\order-svc",
+      "confidence": {
+        "score": 100,
+        "level": "high",
+        "factors": []
+      },
+      "environment": "development",
+      "isEnvironmentAdjusted": false
+    },
+    {
+      "service": "order-svc",
+      "servicePath": "C:\\Users\\86198\\Desktop\\java项目文档\\microservice-mall\\order-svc",
+      "ruleId": "FEIGN-001",
+      "category": "openfeign",
+      "severity": "warning",
+      "title": "@FeignClient \"payment-svc\" 缺少降级配置",
+      "rationale": "无降级配置会导致服务雪崩",
+      "clientName": "payment-svc",
+      "confidence": {
+        "score": 65,
+        "level": "medium",
+        "factors": [
+          {
+            "factor": "no_fallback",
+            "impact": -20
+          },
+          {
+            "factor": "no_factory",
+            "impact": -15
+          }
+        ]
+      },
+      "environment": "development"
+    },
+    {
+      "service": "order-svc",
+      "servicePath": "C:\\Users\\86198\\Desktop\\java项目文档\\microservice-mall\\order-svc",
+      "ruleId": "FEIGN-001",
+      "category": "openfeign",
+      "severity": "warning",
+      "title": "@FeignClient \"inventory-svc\" 缺少降级配置",
+      "rationale": "无降级配置会导致服务雪崩",
+      "clientName": "inventory-svc",
+      "confidence": {
+        "score": 65,
+        "level": "medium",
+        "factors": [
+          {
+            "factor": "no_fallback",
+            "impact": -20
+          },
+          {
+            "factor": "no_factory",
+            "impact": -15
+          }
+        ]
+      },
+      "environment": "development"
+    },
+    {
+      "service": "inventory-svc",
+      "servicePath": "C:\\Users\\86198\\Desktop\\java项目文档\\microservice-mall\\inventory-svc",
+      "ruleId": "NACOS-001",
+      "category": "nacos",
+      "severity": "critical",
+      "title": "Nacos 命名空间必须配置",
+      "rationale": "生产环境必须配置独立命名空间隔离",
+      "location": "C:\\Users\\86198\\Desktop\\java项目文档\\microservice-mall\\inventory-svc",
+      "confidence": {
+        "score": 100,
+        "level": "high",
+        "factors": []
+      },
+      "environment": "unknown",
+      "isEnvironmentAdjusted": false
+    },
+    {
+      "service": "inventory-svc",
+      "servicePath": "C:\\Users\\86198\\Desktop\\java项目文档\\microservice-mall\\inventory-svc",
+      "ruleId": "NACOS-003",
+      "category": "nacos",
+      "severity": "high",
+      "title": "Nacos server-addr 不应使用 localhost (生产环境)",
+      "rationale": "生产环境应使用内网地址或域名",
+      "location": "C:\\Users\\86198\\Desktop\\java项目文档\\microservice-mall\\inventory-svc",
+      "confidence": {
+        "score": 100,
+        "level": "high",
+        "factors": []
+      },
+      "environment": "unknown",
+      "isEnvironmentAdjusted": true
+    },
+    {
+      "service": "inventory-svc",
+      "servicePath": "C:\\Users\\86198\\Desktop\\java项目文档\\microservice-mall\\inventory-svc",
+      "ruleId": "FEIGN-002",
+      "category": "openfeign",
+      "severity": "high",
+      "title": "Sentinel 或 Resilience4j 依赖必须存在",
+      "rationale": "无熔断降级依赖，fallback 不会生效",
+      "location": "C:\\Users\\86198\\Desktop\\java项目文档\\microservice-mall\\inventory-svc",
+      "confidence": {
+        "score": 100,
+        "level": "high",
+        "factors": []
+      },
+      "environment": "unknown",
+      "isEnvironmentAdjusted": false
+    },
+    {
+      "service": "inventory-svc",
+      "servicePath": "C:\\Users\\86198\\Desktop\\java项目文档\\microservice-mall\\inventory-svc",
+      "ruleId": "FEIGN-003",
+      "category": "openfeign",
+      "severity": "critical",
+      "title": "circuitbreaker.enabled 必须为 true",
+      "rationale": "2021.x+ 版本需显式启用",
+      "location": "C:\\Users\\86198\\Desktop\\java项目文档\\microservice-mall\\inventory-svc",
+      "confidence": {
+        "score": 100,
+        "level": "high",
+        "factors": []
+      },
+      "environment": "unknown",
+      "isEnvironmentAdjusted": false
+    },
+    {
+      "service": "gateway-svc",
+      "servicePath": "C:\\Users\\86198\\Desktop\\java项目文档\\microservice-mall\\gateway-svc",
+      "ruleId": "NACOS-003",
+      "category": "nacos",
+      "severity": "high",
+      "title": "Nacos server-addr 不应使用 localhost (生产环境)",
+      "rationale": "生产环境应使用内网地址或域名",
+      "location": "C:\\Users\\86198\\Desktop\\java项目文档\\microservice-mall\\gateway-svc",
+      "confidence": {
+        "score": 100,
+        "level": "high",
+        "factors": []
+      },
+      "environment": "unknown",
+      "isEnvironmentAdjusted": true
+    },
+    {
+      "service": "gateway-svc",
+      "servicePath": "C:\\Users\\86198\\Desktop\\java项目文档\\microservice-mall\\gateway-svc",
+      "ruleId": "FEIGN-001",
+      "category": "openfeign",
+      "severity": "high",
+      "title": "@FeignClient 必须配置 fallback 或 fallbackFactory",
+      "rationale": "无降级配置会导致服务雪崩",
+      "location": "C:\\Users\\86198\\Desktop\\java项目文档\\microservice-mall\\gateway-svc",
+      "confidence": {
+        "score": 65,
+        "level": "medium",
+        "factors": [
+          {
+            "factor": "no_fallback",
+            "impact": -20
+          },
+          {
+            "factor": "no_factory",
+            "impact": -15
+          }
+        ]
+      },
+      "environment": "unknown",
+      "isEnvironmentAdjusted": true
+    },
+    {
+      "service": "gateway-svc",
+      "servicePath": "C:\\Users\\86198\\Desktop\\java项目文档\\microservice-mall\\gateway-svc",
+      "ruleId": "FEIGN-003",
+      "category": "openfeign",
+      "severity": "critical",
+      "title": "circuitbreaker.enabled 必须为 true",
+      "rationale": "2021.x+ 版本需显式启用",
+      "location": "C:\\Users\\86198\\Desktop\\java项目文档\\microservice-mall\\gateway-svc",
+      "confidence": {
+        "score": 100,
+        "level": "high",
+        "factors": []
+      },
+      "environment": "unknown",
+      "isEnvironmentAdjusted": false
+    },
+    {
+      "service": "gateway-svc",
+      "servicePath": "C:\\Users\\86198\\Desktop\\java项目文档\\microservice-mall\\gateway-svc",
+      "ruleId": "HYSTRIX-001",
+      "category": "hystrix",
+      "severity": "high",
+      "title": "Hystrix 已进入维护模式，建议迁移",
+      "rationale": "Netflix Hystrix 自 2018 年停止维护",
+      "location": "C:\\Users\\86198\\Desktop\\java项目文档\\microservice-mall\\gateway-svc",
+      "confidence": {
+        "score": 100,
+        "level": "high",
+        "factors": []
+      },
+      "environment": "unknown",
+      "isEnvironmentAdjusted": false
+    },
+    {
+      "service": "gateway-svc",
+      "servicePath": "C:\\Users\\86198\\Desktop\\java项目文档\\microservice-mall\\gateway-svc",
+      "ruleId": "FEIGN-001",
+      "category": "openfeign",
+      "severity": "high",
+      "title": "@FeignClient \"user-svc\" 缺少降级配置",
+      "rationale": "无降级配置会导致服务雪崩",
+      "clientName": "user-svc",
+      "confidence": {
+        "score": 65,
+        "level": "medium",
+        "factors": [
+          {
+            "factor": "no_fallback",
+            "impact": -20
+          },
+          {
+            "factor": "no_factory",
+            "impact": -15
+          }
+        ]
+      },
+      "environment": "unknown"
+    },
+    {
+      "service": "gateway-svc",
+      "servicePath": "C:\\Users\\86198\\Desktop\\java项目文档\\microservice-mall\\gateway-svc",
+      "ruleId": "FEIGN-001",
+      "category": "openfeign",
+      "severity": "high",
+      "title": "@FeignClient \"order-svc\" 缺少降级配置",
+      "rationale": "无降级配置会导致服务雪崩",
+      "clientName": "order-svc",
+      "confidence": {
+        "score": 65,
+        "level": "medium",
+        "factors": [
+          {
+            "factor": "no_fallback",
+            "impact": -20
+          },
+          {
+            "factor": "no_factory",
+            "impact": -15
+          }
+        ]
+      },
+      "environment": "unknown"
+    }
+  ],
+  "services": [
+    {
+      "name": "user-svc",
+      "path": "C:\\Users\\86198\\Desktop\\java项目文档\\microservice-mall\\user-svc",
+      "warnings": [],
+      "pom": {
+        "groupId": "org.springframework.cloud",
+        "hasOpenfeign": true,
+        "hasSentinel": true,
+        "hasHystrix": false,
+        "openfeignDeps": [
+          {
+            "groupId": "org.springframework.cloud",
+            "artifactId": "spring-cloud-starter-openfeign",
+            "version": "",
+            "scope": ""
+          }
+        ],
+        "nacosDiscoveryDeps": [
+          {
+            "groupId": "com.alibaba.cloud",
+            "artifactId": "spring-cloud-starter-alibaba-nacos-discovery",
+            "version": "",
+            "scope": ""
+          }
+        ],
+        "nacosConfigDeps": [],
+        "sentinelDeps": [
+          {
+            "groupId": "com.alibaba.cloud",
+            "artifactId": "spring-cloud-starter-alibaba-sentinel",
+            "version": "",
+            "scope": ""
+          }
+        ],
+        "hystrixDeps": [],
+        "resilience4jDeps": [],
+        "allDeps": [
+          {
+            "groupId": "org.springframework.cloud",
+            "artifactId": "spring-cloud-starter-openfeign",
+            "version": "",
+            "scope": ""
+          },
+          {
+            "groupId": "com.alibaba.cloud",
+            "artifactId": "spring-cloud-starter-alibaba-sentinel",
+            "version": "",
+            "scope": ""
+          },
+          {
+            "groupId": "com.alibaba.cloud",
+            "artifactId": "spring-cloud-starter-alibaba-nacos-discovery",
+            "version": "",
+            "scope": ""
+          }
+        ]
+      },
+      "circuitBreaker": {
+        "provider": "sentinel",
+        "supported": true
+      },
+      "nacos": {
+        "discoveryAddr": "nacos-cluster.mall.internal:8848",
+        "discoveryNamespace": "prod"
+      },
+      "detectedEnvironment": "production",
+      "feignClients": [
+        {
+          "name": "notify-svc",
+          "path": "/api/notify",
+          "url": null,
+          "contextId": null,
+          "fallback": null,
+          "fallbackFactory": null,
+          "configuration": null,
+          "qualifiers": null,
+          "primary": null,
+          "file": "src\\main\\java\\com\\mall\\user\\client\\NotifyClient.java"
+        },
+        {
+          "name": "auth-svc",
+          "path": "/api/auth",
+          "url": null,
+          "contextId": null,
+          "fallback": null,
+          "fallbackFactory": "AuthServiceFallbackFactory.class",
+          "configuration": null,
+          "qualifiers": null,
+          "primary": null,
+          "file": "src\\main\\java\\com\\mall\\user\\client\\AuthClient.java"
+        }
+      ],
+      "summary": {
+        "totalFeignClients": 2,
+        "feignWithFallback": 0,
+        "feignWithFallbackFactory": 1,
+        "feignWithoutFallback": 1,
+        "feignFallbackConfigured": true,
+        "hasCircuitBreaker": true,
+        "circuitBreakerProvider": "sentinel"
+      }
+    },
+    {
+      "name": "payment-svc",
+      "path": "C:\\Users\\86198\\Desktop\\java项目文档\\microservice-mall\\payment-svc",
+      "warnings": [],
+      "pom": {
+        "groupId": "org.springframework.cloud",
+        "hasOpenfeign": true,
+        "hasSentinel": true,
+        "hasHystrix": false,
+        "openfeignDeps": [
+          {
+            "groupId": "org.springframework.cloud",
+            "artifactId": "spring-cloud-starter-openfeign",
+            "version": "",
+            "scope": ""
+          }
+        ],
+        "nacosDiscoveryDeps": [
+          {
+            "groupId": "com.alibaba.cloud",
+            "artifactId": "spring-cloud-starter-alibaba-nacos-discovery",
+            "version": "",
+            "scope": ""
+          }
+        ],
+        "nacosConfigDeps": [],
+        "sentinelDeps": [
+          {
+            "groupId": "com.alibaba.cloud",
+            "artifactId": "spring-cloud-starter-alibaba-sentinel",
+            "version": "",
+            "scope": ""
+          }
+        ],
+        "hystrixDeps": [],
+        "resilience4jDeps": [],
+        "allDeps": [
+          {
+            "groupId": "org.springframework.cloud",
+            "artifactId": "spring-cloud-starter-openfeign",
+            "version": "",
+            "scope": ""
+          },
+          {
+            "groupId": "com.alibaba.cloud",
+            "artifactId": "spring-cloud-starter-alibaba-sentinel",
+            "version": "",
+            "scope": ""
+          },
+          {
+            "groupId": "com.alibaba.cloud",
+            "artifactId": "spring-cloud-starter-alibaba-nacos-discovery",
+            "version": "",
+            "scope": ""
+          }
+        ]
+      },
+      "circuitBreaker": {
+        "provider": "sentinel",
+        "supported": true
+      },
+      "nacos": {
+        "discoveryAddr": "nacos-cluster.mall.internal:8848",
+        "discoveryNamespace": "prod"
+      },
+      "detectedEnvironment": "production",
+      "feignClients": [
+        {
+          "name": "account-svc",
+          "path": "/api/accounts",
+          "url": null,
+          "contextId": null,
+          "fallback": "AccountClientFallback.class",
+          "fallbackFactory": null,
+          "configuration": null,
+          "qualifiers": null,
+          "primary": null,
+          "file": "src\\main\\java\\com\\mall\\payment\\client\\AccountClient.java"
+        }
+      ],
+      "summary": {
+        "totalFeignClients": 1,
+        "feignWithFallback": 1,
+        "feignWithFallbackFactory": 0,
+        "feignWithoutFallback": 0,
+        "feignFallbackConfigured": true,
+        "hasCircuitBreaker": true,
+        "circuitBreakerProvider": "sentinel"
+      }
+    },
+    {
+      "name": "order-svc",
+      "path": "C:\\Users\\86198\\Desktop\\java项目文档\\microservice-mall\\order-svc",
+      "warnings": [],
+      "pom": {
+        "groupId": "org.springframework.cloud",
+        "hasOpenfeign": true,
+        "hasSentinel": false,
+        "hasHystrix": false,
+        "openfeignDeps": [
+          {
+            "groupId": "org.springframework.cloud",
+            "artifactId": "spring-cloud-starter-openfeign",
+            "version": "",
+            "scope": ""
+          }
+        ],
+        "nacosDiscoveryDeps": [
+          {
+            "groupId": "com.alibaba.cloud",
+            "artifactId": "spring-cloud-starter-alibaba-nacos-discovery",
+            "version": "",
+            "scope": ""
+          }
+        ],
+        "nacosConfigDeps": [
+          {
+            "groupId": "com.alibaba.cloud",
+            "artifactId": "spring-cloud-starter-alibaba-nacos-config",
+            "version": "",
+            "scope": ""
+          }
+        ],
+        "sentinelDeps": [],
+        "hystrixDeps": [],
+        "resilience4jDeps": [],
+        "allDeps": [
+          {
+            "groupId": "org.springframework.cloud",
+            "artifactId": "spring-cloud-starter-openfeign",
+            "version": "",
+            "scope": ""
+          },
+          {
+            "groupId": "com.alibaba.cloud",
+            "artifactId": "spring-cloud-starter-alibaba-nacos-discovery",
+            "version": "",
+            "scope": ""
+          },
+          {
+            "groupId": "com.alibaba.cloud",
+            "artifactId": "spring-cloud-starter-alibaba-nacos-config",
+            "version": "",
+            "scope": ""
+          }
+        ]
+      },
+      "circuitBreaker": {
+        "provider": null,
+        "supported": false
+      },
+      "nacos": {
+        "discoveryAddr": "127.0.0.1:8848",
+        "discoveryNamespace": "dev",
+        "configAddr": "127.0.0.1:8848",
+        "configNamespace": "dev"
+      },
+      "detectedEnvironment": "development",
+      "feignClients": [
+        {
+          "name": "payment-svc",
+          "path": "/api/payments",
+          "url": null,
+          "contextId": null,
+          "fallback": null,
+          "fallbackFactory": null,
+          "configuration": null,
+          "qualifiers": null,
+          "primary": null,
+          "file": "src\\main\\java\\com\\mall\\order\\client\\PaymentClient.java"
+        },
+        {
+          "name": "inventory-svc",
+          "path": "/api/inventory",
+          "url": null,
+          "contextId": null,
+          "fallback": null,
+          "fallbackFactory": null,
+          "configuration": null,
+          "qualifiers": null,
+          "primary": null,
+          "file": "src\\main\\java\\com\\mall\\order\\client\\InventoryClient.java"
+        }
+      ],
+      "summary": {
+        "totalFeignClients": 2,
+        "feignWithFallback": 0,
+        "feignWithFallbackFactory": 0,
+        "feignWithoutFallback": 2,
+        "feignFallbackConfigured": false,
+        "hasCircuitBreaker": false,
+        "circuitBreakerProvider": "none"
+      }
+    },
+    {
+      "name": "inventory-svc",
+      "path": "C:\\Users\\86198\\Desktop\\java项目文档\\microservice-mall\\inventory-svc",
+      "warnings": [],
+      "pom": {
+        "groupId": "org.springframework.cloud",
+        "hasOpenfeign": true,
+        "hasSentinel": false,
+        "hasHystrix": false,
+        "openfeignDeps": [
+          {
+            "groupId": "org.springframework.cloud",
+            "artifactId": "spring-cloud-starter-openfeign",
+            "version": "",
+            "scope": ""
+          }
+        ],
+        "nacosDiscoveryDeps": [
+          {
+            "groupId": "com.alibaba.cloud",
+            "artifactId": "spring-cloud-starter-alibaba-nacos-discovery",
+            "version": "",
+            "scope": ""
+          }
+        ],
+        "nacosConfigDeps": [],
+        "sentinelDeps": [],
+        "hystrixDeps": [],
+        "resilience4jDeps": [],
+        "allDeps": [
+          {
+            "groupId": "org.springframework.cloud",
+            "artifactId": "spring-cloud-starter-openfeign",
+            "version": "",
+            "scope": ""
+          },
+          {
+            "groupId": "com.alibaba.cloud",
+            "artifactId": "spring-cloud-starter-alibaba-nacos-discovery",
+            "version": "",
+            "scope": ""
+          }
+        ]
+      },
+      "circuitBreaker": {
+        "provider": null,
+        "supported": false
+      },
+      "nacos": {
+        "discoveryAddr": "127.0.0.1:8848"
+      },
+      "detectedEnvironment": "unknown",
+      "feignClients": [],
+      "summary": {
+        "totalFeignClients": 0,
+        "feignWithFallback": 0,
+        "feignWithFallbackFactory": 0,
+        "feignWithoutFallback": 0,
+        "feignFallbackConfigured": false,
+        "hasCircuitBreaker": false,
+        "circuitBreakerProvider": "none"
+      }
+    },
+    {
+      "name": "gateway-svc",
+      "path": "C:\\Users\\86198\\Desktop\\java项目文档\\microservice-mall\\gateway-svc",
+      "warnings": [],
+      "pom": {
+        "groupId": "org.springframework.cloud",
+        "hasOpenfeign": true,
+        "hasSentinel": false,
+        "hasHystrix": true,
+        "openfeignDeps": [
+          {
+            "groupId": "org.springframework.cloud",
+            "artifactId": "spring-cloud-starter-openfeign",
+            "version": "",
+            "scope": ""
+          }
+        ],
+        "nacosDiscoveryDeps": [
+          {
+            "groupId": "com.alibaba.cloud",
+            "artifactId": "spring-cloud-starter-alibaba-nacos-discovery",
+            "version": "",
+            "scope": ""
+          }
+        ],
+        "nacosConfigDeps": [],
+        "sentinelDeps": [],
+        "hystrixDeps": [
+          {
+            "groupId": "org.springframework.cloud",
+            "artifactId": "spring-cloud-starter-netflix-hystrix",
+            "version": "",
+            "scope": ""
+          }
+        ],
+        "resilience4jDeps": [],
+        "allDeps": [
+          {
+            "groupId": "org.springframework.cloud",
+            "artifactId": "spring-cloud-starter-openfeign",
+            "version": "",
+            "scope": ""
+          },
+          {
+            "groupId": "org.springframework.cloud",
+            "artifactId": "spring-cloud-starter-netflix-hystrix",
+            "version": "",
+            "scope": ""
+          },
+          {
+            "groupId": "com.alibaba.cloud",
+            "artifactId": "spring-cloud-starter-alibaba-nacos-discovery",
+            "version": "",
+            "scope": ""
+          }
+        ]
+      },
+      "circuitBreaker": {
+        "provider": "hystrix",
+        "supported": true
+      },
+      "nacos": {
+        "discoveryAddr": "127.0.0.1:8848",
+        "discoveryNamespace": "public"
+      },
+      "detectedEnvironment": "unknown",
+      "feignClients": [
+        {
+          "name": "user-svc",
+          "path": "/api/users",
+          "url": null,
+          "contextId": null,
+          "fallback": null,
+          "fallbackFactory": null,
+          "configuration": null,
+          "qualifiers": null,
+          "primary": null,
+          "file": "src\\main\\java\\com\\mall\\gateway\\client\\UserServiceClient.java"
+        },
+        {
+          "name": "order-svc",
+          "path": "/api/orders",
+          "url": null,
+          "contextId": null,
+          "fallback": null,
+          "fallbackFactory": null,
+          "configuration": null,
+          "qualifiers": null,
+          "primary": null,
+          "file": "src\\main\\java\\com\\mall\\gateway\\client\\OrderServiceClient.java"
+        }
+      ],
+      "summary": {
+        "totalFeignClients": 2,
+        "feignWithFallback": 0,
+        "feignWithFallbackFactory": 0,
+        "feignWithoutFallback": 2,
+        "feignFallbackConfigured": false,
+        "hasCircuitBreaker": true,
+        "circuitBreakerProvider": "hystrix"
+      }
+    }
+  ],
+  "summary": {
+    "totalFindings": 17,
+    "totalWarnings": 0,
+    "bySeverity": {
+      "critical": 5,
+      "high": 9,
+      "medium": 0,
+      "low": 0,
+      "info": 0
+    },
+    "byCategory": {
+      "openfeign": 12,
+      "nacos": 4,
+      "hystrix": 1
+    },
+    "environmentBreakdown": {
+      "production": 1,
+      "development": 6,
+      "testing": 0,
+      "unknown": 10
+    },
+    "confidenceStats": {
+      "high": 11,
+      "medium": 6,
+      "low": 0
+    },
+    "score": 0,
+    "grade": "F"
+  },
+  "serviceGraph": {
+    "nodes": [
+      {
+        "id": "user-svc",
+        "type": "service",
+        "moduleCount": 1,
+        "feignClientCount": 2,
+        "environment": "production",
+        "hasCircuitBreaker": true
+      },
+      {
+        "id": "payment-svc",
+        "type": "service",
+        "moduleCount": 1,
+        "feignClientCount": 1,
+        "environment": "production",
+        "hasCircuitBreaker": true
+      },
+      {
+        "id": "order-svc",
+        "type": "service",
+        "moduleCount": 1,
+        "feignClientCount": 2,
+        "environment": "development",
+        "hasCircuitBreaker": false
+      },
+      {
+        "id": "inventory-svc",
+        "type": "service",
+        "moduleCount": 1,
+        "feignClientCount": 0,
+        "environment": "unknown",
+        "hasCircuitBreaker": false
+      },
+      {
+        "id": "gateway-svc",
+        "type": "service",
+        "moduleCount": 1,
+        "feignClientCount": 2,
+        "environment": "unknown",
+        "hasCircuitBreaker": true
+      }
+    ],
+    "edges": [
+      {
+        "from": "user-svc",
+        "to": "notify-svc",
+        "hasFallback": false,
+        "methodCount": 0
+      },
+      {
+        "from": "user-svc",
+        "to": "auth-svc",
+        "hasFallback": true,
+        "methodCount": 0
+      },
+      {
+        "from": "payment-svc",
+        "to": "account-svc",
+        "hasFallback": true,
+        "methodCount": 0
+      },
+      {
+        "from": "order-svc",
+        "to": "payment-svc",
+        "hasFallback": false,
+        "methodCount": 0
+      },
+      {
+        "from": "order-svc",
+        "to": "inventory-svc",
+        "hasFallback": false,
+        "methodCount": 0
+      },
+      {
+        "from": "gateway-svc",
+        "to": "user-svc",
+        "hasFallback": false,
+        "methodCount": 0
+      },
+      {
+        "from": "gateway-svc",
+        "to": "order-svc",
+        "hasFallback": false,
+        "methodCount": 0
+      }
+    ],
+    "metrics": {
+      "mostCalledService": "notify-svc",
+      "maxCalls": 1,
+      "servicesWithoutFallback": [
+        "notify-svc",
+        "payment-svc",
+        "inventory-svc",
+        "user-svc",
+        "order-svc"
+      ],
+      "singlePointsOfFailure": []
+    }
+  }
+}

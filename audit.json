@@ -1,0 +1,337 @@
+{
+  "standardsVersion": "Spring Cloud Alibaba 2022.x Enhanced",
+  "projectRoot": "C:\\Users\\86198\\Desktop\\java项目文档\\microservice-mall",
+  "detectedEnvironment": "production",
+  "findings": [
+    {
+      "service": "user-svc",
+      "servicePath": "..\\..\\java项目文档\\microservice-mall\\user-svc",
+      "ruleId": "FEIGN-002",
+      "category": "openfeign",
+      "severity": "high",
+      "title": "Sentinel 或 Resilience4j 依赖必须存在",
+      "rationale": "无熔断降级依赖，fallback 不会生效",
+      "location": "..\\..\\java项目文档\\microservice-mall\\user-svc",
+      "confidence": {
+        "score": 100,
+        "level": "high",
+        "factors": []
+      },
+      "environment": "unknown",
+      "isEnvironmentAdjusted": false
+    },
+    {
+      "service": "user-svc",
+      "servicePath": "..\\..\\java项目文档\\microservice-mall\\user-svc",
+      "ruleId": "FEIGN-003",
+      "category": "openfeign",
+      "severity": "critical",
+      "title": "circuitbreaker.enabled 必须为 true",
+      "rationale": "2021.x+ 版本需显式启用",
+      "location": "..\\..\\java项目文档\\microservice-mall\\user-svc",
+      "confidence": {
+        "score": 100,
+        "level": "high",
+        "factors": []
+      },
+      "environment": "unknown",
+      "isEnvironmentAdjusted": false
+    },
+    {
+      "service": "payment-svc",
+      "servicePath": "..\\..\\java项目文档\\microservice-mall\\payment-svc",
+      "ruleId": "FEIGN-002",
+      "category": "openfeign",
+      "severity": "high",
+      "title": "Sentinel 或 Resilience4j 依赖必须存在",
+      "rationale": "无熔断降级依赖，fallback 不会生效",
+      "location": "..\\..\\java项目文档\\microservice-mall\\payment-svc",
+      "confidence": {
+        "score": 100,
+        "level": "high",
+        "factors": []
+      },
+      "environment": "unknown",
+      "isEnvironmentAdjusted": false
+    },
+    {
+      "service": "payment-svc",
+      "servicePath": "..\\..\\java项目文档\\microservice-mall\\payment-svc",
+      "ruleId": "FEIGN-003",
+      "category": "openfeign",
+      "severity": "critical",
+      "title": "circuitbreaker.enabled 必须为 true",
+      "rationale": "2021.x+ 版本需显式启用",
+      "location": "..\\..\\java项目文档\\microservice-mall\\payment-svc",
+      "confidence": {
+        "score": 100,
+        "level": "high",
+        "factors": []
+      },
+      "environment": "unknown",
+      "isEnvironmentAdjusted": false
+    },
+    {
+      "service": "order-svc",
+      "servicePath": "..\\..\\java项目文档\\microservice-mall\\order-svc",
+      "ruleId": "FEIGN-002",
+      "category": "openfeign",
+      "severity": "high",
+      "title": "Sentinel 或 Resilience4j 依赖必须存在",
+      "rationale": "无熔断降级依赖，fallback 不会生效",
+      "location": "..\\..\\java项目文档\\microservice-mall\\order-svc",
+      "confidence": {
+        "score": 100,
+        "level": "high",
+        "factors": []
+      },
+      "environment": "unknown",
+      "isEnvironmentAdjusted": false
+    },
+    {
+      "service": "order-svc",
+      "servicePath": "..\\..\\java项目文档\\microservice-mall\\order-svc",
+      "ruleId": "FEIGN-003",
+      "category": "openfeign",
+      "severity": "critical",
+      "title": "circuitbreaker.enabled 必须为 true",
+      "rationale": "2021.x+ 版本需显式启用",
+      "location": "..\\..\\java项目文档\\microservice-mall\\order-svc",
+      "confidence": {
+        "score": 100,
+        "level": "high",
+        "factors": []
+      },
+      "environment": "unknown",
+      "isEnvironmentAdjusted": false
+    },
+    {
+      "service": "inventory-svc",
+      "servicePath": "..\\..\\java项目文档\\microservice-mall\\inventory-svc",
+      "ruleId": "FEIGN-002",
+      "category": "openfeign",
+      "severity": "high",
+      "title": "Sentinel 或 Resilience4j 依赖必须存在",
+      "rationale": "无熔断降级依赖，fallback 不会生效",
+      "location": "..\\..\\java项目文档\\microservice-mall\\inventory-svc",
+      "confidence": {
+        "score": 100,
+        "level": "high",
+        "factors": []
+      },
+      "environment": "unknown",
+      "isEnvironmentAdjusted": false
+    },
+    {
+      "service": "inventory-svc",
+      "servicePath": "..\\..\\java项目文档\\microservice-mall\\inventory-svc",
+      "ruleId": "FEIGN-003",
+      "category": "openfeign",
+      "severity": "critical",
+      "title": "circuitbreaker.enabled 必须为 true",
+      "rationale": "2021.x+ 版本需显式启用",
+      "location": "..\\..\\java项目文档\\microservice-mall\\inventory-svc",
+      "confidence": {
+        "score": 100,
+        "level": "high",
+        "factors": []
+      },
+      "environment": "unknown",
+      "isEnvironmentAdjusted": false
+    },
+    {
+      "service": "gateway-svc",
+      "servicePath": "..\\..\\java项目文档\\microservice-mall\\gateway-svc",
+      "ruleId": "FEIGN-002",
+      "category": "openfeign",
+      "severity": "high",
+      "title": "Sentinel 或 Resilience4j 依赖必须存在",
+      "rationale": "无熔断降级依赖，fallback 不会生效",
+      "location": "..\\..\\java项目文档\\microservice-mall\\gateway-svc",
+      "confidence": {
+        "score": 100,
+        "level": "high",
+        "factors": []
+      },
+      "environment": "unknown",
+      "isEnvironmentAdjusted": false
+    },
+    {
+      "service": "gateway-svc",
+      "servicePath": "..\\..\\java项目文档\\microservice-mall\\gateway-svc",
+      "ruleId": "FEIGN-003",
+      "category": "openfeign",
+      "severity": "critical",
+      "title": "circuitbreaker.enabled 必须为 true",
+      "rationale": "2021.x+ 版本需显式启用",
+      "location": "..\\..\\java项目文档\\microservice-mall\\gateway-svc",
+      "confidence": {
+        "score": 100,
+        "level": "high",
+        "factors": []
+      },
+      "environment": "unknown",
+      "isEnvironmentAdjusted": false
+    }
+  ],
+  "services": [
+    {
+      "name": "user-svc",
+      "path": "..\\..\\java项目文档\\microservice-mall\\user-svc",
+      "warnings": [],
+      "nacos": {},
+      "detectedEnvironment": "unknown",
+      "feignClients": [],
+      "summary": {
+        "totalFeignClients": 0,
+        "feignWithFallback": 0,
+        "feignWithFallbackFactory": 0,
+        "feignWithoutFallback": 0,
+        "hasCircuitBreaker": false,
+        "circuitBreakerProvider": "none"
+      }
+    },
+    {
+      "name": "payment-svc",
+      "path": "..\\..\\java项目文档\\microservice-mall\\payment-svc",
+      "warnings": [],
+      "nacos": {},
+      "detectedEnvironment": "unknown",
+      "feignClients": [],
+      "summary": {
+        "totalFeignClients": 0,
+        "feignWithFallback": 0,
+        "feignWithFallbackFactory": 0,
+        "feignWithoutFallback": 0,
+        "hasCircuitBreaker": false,
+        "circuitBreakerProvider": "none"
+      }
+    },
+    {
+      "name": "order-svc",
+      "path": "..\\..\\java项目文档\\microservice-mall\\order-svc",
+      "warnings": [],
+      "nacos": {},
+      "detectedEnvironment": "unknown",
+      "feignClients": [],
+      "summary": {
+        "totalFeignClients": 0,
+        "feignWithFallback": 0,
+        "feignWithFallbackFactory": 0,
+        "feignWithoutFallback": 0,
+        "hasCircuitBreaker": false,
+        "circuitBreakerProvider": "none"
+      }
+    },
+    {
+      "name": "inventory-svc",
+      "path": "..\\..\\java项目文档\\microservice-mall\\inventory-svc",
+      "warnings": [],
+      "nacos": {},
+      "detectedEnvironment": "unknown",
+      "feignClients": [],
+      "summary": {
+        "totalFeignClients": 0,
+        "feignWithFallback": 0,
+        "feignWithFallbackFactory": 0,
+        "feignWithoutFallback": 0,
+        "hasCircuitBreaker": false,
+        "circuitBreakerProvider": "none"
+      }
+    },
+    {
+      "name": "gateway-svc",
+      "path": "..\\..\\java项目文档\\microservice-mall\\gateway-svc",
+      "warnings": [],
+      "nacos": {},
+      "detectedEnvironment": "unknown",
+      "feignClients": [],
+      "summary": {
+        "totalFeignClients": 0,
+        "feignWithFallback": 0,
+        "feignWithFallbackFactory": 0,
+        "feignWithoutFallback": 0,
+        "hasCircuitBreaker": false,
+        "circuitBreakerProvider": "none"
+      }
+    }
+  ],
+  "summary": {
+    "totalFindings": 10,
+    "totalWarnings": 0,
+    "bySeverity": {
+      "critical": 5,
+      "high": 5,
+      "medium": 0,
+      "low": 0,
+      "info": 0
+    },
+    "byCategory": {
+      "openfeign": 10
+    },
+    "environmentBreakdown": {
+      "production": 0,
+      "development": 0,
+      "testing": 0,
+      "unknown": 10
+    },
+    "confidenceStats": {
+      "high": 10,
+      "medium": 0,
+      "low": 0
+    },
+    "score": 0,
+    "grade": "F"
+  },
+  "serviceGraph": {
+    "nodes": [
+      {
+        "id": "user-svc",
+        "type": "service",
+        "moduleCount": 1,
+        "feignClientCount": 0,
+        "environment": "unknown",
+        "hasCircuitBreaker": false
+      },
+      {
+        "id": "payment-svc",
+        "type": "service",
+        "moduleCount": 1,
+        "feignClientCount": 0,
+        "environment": "unknown",
+        "hasCircuitBreaker": false
+      },
+      {
+        "id": "order-svc",
+        "type": "service",
+        "moduleCount": 1,
+        "feignClientCount": 0,
+        "environment": "unknown",
+        "hasCircuitBreaker": false
+      },
+      {
+        "id": "inventory-svc",
+        "type": "service",
+        "moduleCount": 1,
+        "feignClientCount": 0,
+        "environment": "unknown",
+        "hasCircuitBreaker": false
+      },
+      {
+        "id": "gateway-svc",
+        "type": "service",
+        "moduleCount": 1,
+        "feignClientCount": 0,
+        "environment": "unknown",
+        "hasCircuitBreaker": false
+      }
+    ],
+    "edges": [],
+    "metrics": {
+      "mostCalledService": null,
+      "maxCalls": 0,
+      "servicesWithoutFallback": [],
+      "singlePointsOfFailure": []
+    }
+  }
+}

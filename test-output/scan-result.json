@@ -1,0 +1,102 @@
+{
+  "projectRoot": "C:\\Users\\86198\\Desktop\\java项目文档\\microservice-mall",
+  "scanTime": "2026-05-10T12:37:41.391Z",
+  "services": [
+    {
+      "name": "user-svc",
+      "path": "..\\..\\java项目文档\\microservice-mall\\user-svc",
+      "warnings": [],
+      "nacos": {},
+      "detectedEnvironment": "unknown",
+      "feignClients": [],
+      "summary": {
+        "totalFeignClients": 0,
+        "feignWithFallback": 0,
+        "feignWithFallbackFactory": 0,
+        "feignWithoutFallback": 0,
+        "hasCircuitBreaker": false,
+        "circuitBreakerProvider": "none"
+      }
+    },
+    {
+      "name": "payment-svc",
+      "path": "..\\..\\java项目文档\\microservice-mall\\payment-svc",
+      "warnings": [],
+      "nacos": {},
+      "detectedEnvironment": "unknown",
+      "feignClients": [],
+      "summary": {
+        "totalFeignClients": 0,
+        "feignWithFallback": 0,
+        "feignWithFallbackFactory": 0,
+        "feignWithoutFallback": 0,
+        "hasCircuitBreaker": false,
+        "circuitBreakerProvider": "none"
+      }
+    },
+    {
+      "name": "order-svc",
+      "path": "..\\..\\java项目文档\\microservice-mall\\order-svc",
+      "warnings": [],
+      "nacos": {},
+      "detectedEnvironment": "unknown",
+      "feignClients": [],
+      "summary": {
+        "totalFeignClients": 0,
+        "feignWithFallback": 0,
+        "feignWithFallbackFactory": 0,
+        "feignWithoutFallback": 0,
+        "hasCircuitBreaker": false,
+        "circuitBreakerProvider": "none"
+      }
+    },
+    {
+      "name": "inventory-svc",
+      "path": "..\\..\\java项目文档\\microservice-mall\\inventory-svc",
+      "warnings": [],
+      "nacos": {},
+      "detectedEnvironment": "unknown",
+      "feignClients": [],
+      "summary": {
+        "totalFeignClients": 0,
+        "feignWithFallback": 0,
+        "feignWithFallbackFactory": 0,
+        "feignWithoutFallback": 0,
+        "hasCircuitBreaker": false,
+        "circuitBreakerProvider": "none"
+      }
+    },
+    {
+      "name": "gateway-svc",
+      "path": "..\\..\\java项目文档\\microservice-mall\\gateway-svc",
+      "warnings": [],
+      "nacos": {},
+      "detectedEnvironment": "unknown",
+      "feignClients": [],
+      "summary": {
+        "totalFeignClients": 0,
+        "feignWithFallback": 0,
+        "feignWithFallbackFactory": 0,
+        "feignWithoutFallback": 0,
+        "hasCircuitBreaker": false,
+        "circuitBreakerProvider": "none"
+      }
+    }
+  ],
+  "globalSummary": {
+    "totalModules": 5,
+    "totalFeignClients": 0,
+    "feignWithFallback": 0,
+    "feignWithFallbackFactory": 0,
+    "feignWithoutFallback": 0,
+    "modulesWithNacos": 0,
+    "modulesWithCircuitBreaker": 0,
+    "environment": {
+      "production": 0,
+      "development": 0,
+      "testing": 0,
+      "unknown": 5
+    },
+    "warnings": 0
+  }
+}
